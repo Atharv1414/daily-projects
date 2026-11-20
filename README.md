@@ -1,0 +1,29 @@
+# 🛠 Daily Projects
+
+A new, self-contained project every day, each aimed at a role I'm applying for: **Software Engineer, Data Engineer, Data Analyst, BI Developer and Business Analyst**.
+
+Every project solves a realistic business problem, ships with tests and its own sample data, and explains the skills it demonstrates in its README.
+
+| # | Date | Project | Role focus | Stack |
+|---|---|---|---|---|
+| 001 | 2026-11-20 | [💸 Expense Tracker CLI](expense-tracker-cli/) | Software Engineer | Python, SQLite, pytest |
+
+## Layout
+
+Each project lives in its own folder with a standard structure:
+
+```text
+project-name/
+├── src/<package>/   # source code
+├── tests/           # pytest tests
+├── pyproject.toml   # metadata, dependencies, tool settings
+├── README.md        # problem, features, example output, skills demonstrated
+├── LICENSE
+└── .gitignore
+```
+
+Every push runs each project's tests automatically with GitHub Actions.
+
+## License
+
+MIT
