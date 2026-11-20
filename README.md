@@ -1,6 +1,8 @@
 # 🛠 Daily Projects
 
-A new, self-contained project every day, each aimed at a role I'm applying for: **Software Engineer, Data Engineer, Data Analyst, BI Developer and Business Analyst**.
+A new, self-contained project every day, each aimed at a role I'm applying for: **Software Engineer, AI / Agentic AI Engineer, Data Engineer, Data Analyst, BI Developer and Business Analyst**.
+
+Agentic AI projects use Claude tool calling and cover current patterns such as MCP servers, agentic RAG, multi-agent orchestration, guardrails and LLM evals. Each one also runs in an offline demo mode, so no API key is needed to try it.
 
 Every project solves a realistic business problem, ships with tests and its own sample data, and explains the skills it demonstrates in its README.
 
