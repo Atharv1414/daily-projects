@@ -1,3 +1,3 @@
-"""Expense Tracker CLI: track spending against monthly category budgets."""
+"""Expense Tracker: personal finance CLI with statement import, budgets and analytics."""
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"

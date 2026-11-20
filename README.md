@@ -8,7 +8,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 
 | # | Date | Project | Role focus | Stack |
 |---|---|---|---|---|
-| 001 | 2026-11-20 | [💸 Expense Tracker CLI](expense-tracker-cli/) | Software Engineer | Python, SQLite, pytest |
+| 001 | 2026-11-20 | [💸 Expense Tracker](expense-tracker-cli/) | Software Engineer | Python, SQLite (migrations, window functions), pytest + Hypothesis, Docker |
 
 ## Layout
 

@@ -8,3 +8,7 @@ build/
 dist/
 *.db
 *.csv
+.coverage
+htmlcov/
+report.html
+data/

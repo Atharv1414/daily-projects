@@ -4,16 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "expense-tracker-cli"
-version = "1.0.0"
-description = "Command-line expense tracker with monthly budgets, overspend alerts and CSV export"
+version = "2.0.0"
+description = "Personal finance CLI: bank statement import, auto-categorisation, budgets, forecasting and anomaly detection"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Atharv Patil" }]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.5"]
+dev = ["pytest>=8", "pytest-cov>=5", "hypothesis>=6.100", "ruff>=0.5"]
 
 [project.scripts]
 expense = "expense_tracker.cli:main"
@@ -24,10 +24,11 @@ where = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+addopts = "-q"
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]
