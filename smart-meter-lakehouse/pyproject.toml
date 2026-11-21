@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smart-meter-lakehouse"
+version = "1.0.0"
+description = "Incremental smart-meter lakehouse: multi-format ingest, data quality with quarantine, SCD2 dimensions, DuckDB star schema and a DAG runner with retries and lineage"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Atharv Patil" }]
+requires-python = ">=3.11"
+dependencies = ["duckdb>=1.1", "pyarrow>=15", "numpy>=1.26", "pydantic>=2.6", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "hypothesis>=6.100"]
+
+[project.scripts]
+meterlake = "smart_meter_lakehouse.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
