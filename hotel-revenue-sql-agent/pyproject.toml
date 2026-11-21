@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hotel-revenue-sql-agent"
+version = "1.0.0"
+description = "Text-to-SQL analyst agent for a UK hotel group: Claude tool use, read-only SQL guardrails, self-correction, human approval, tracing and an eval suite"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Atharv Patil" }]
+requires-python = ">=3.11"
+dependencies = ["anthropic>=0.70", "pydantic>=2.6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "hypothesis>=6.100"]
+
+[project.scripts]
+hotel-agent = "hotel_revenue_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]

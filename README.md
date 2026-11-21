@@ -9,6 +9,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | # | Date | Project | Role focus | Stack |
 |---|---|---|---|---|
 | 001 | 2026-11-20 | [💸 Expense Tracker](expense-tracker-cli/) | Software Engineer | Python, SQLite (migrations, window functions), pytest + Hypothesis, Docker |
+| 002 | 2026-11-21 | [🏨 Hotel Revenue SQL Agent](hotel-revenue-sql-agent/) | Agentic AI Engineer | Python, Claude tool use (Anthropic SDK), SQLite guardrails, Pydantic, evals, tracing |
 
 ## Layout
 
