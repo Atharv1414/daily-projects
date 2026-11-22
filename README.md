@@ -13,21 +13,21 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 003 | 2026-11-21 | [⚡ Smart Meter Lakehouse](smart-meter-lakehouse/) | Data Engineer | Python, DuckDB (SCD2, ASOF joins), PyArrow/Parquet, Pydantic, DAG runner |
 | 004 | 2026-11-21 | [🏥 NHS Outpatient DNA Analysis](nhs-outpatient-dna-analysis/) | Data Analyst | Python, pandas, statsmodels (RCT, logistic regression, forecasting), SciPy, matplotlib |
 
-## Layout
+## Languages and layout
 
-Each project lives in its own folder with a standard structure:
+Projects are written in **Python**, **C# (.NET 10)** and **C++20**. Each one lives in its own folder with a README, an architecture write-up (`docs/ARCHITECTURE.md`), tests and an MIT licence.
 
-```text
-project-name/
-├── src/<package>/   # source code
-├── tests/           # pytest tests
-├── pyproject.toml   # metadata, dependencies, tool settings
-├── README.md        # problem, features, example output, skills demonstrated
-├── LICENSE
-└── .gitignore
-```
+| Language | Build and test | Structure |
+|---|---|---|
+| Python | `pip install -e ".[dev]"` · `pytest` · `ruff` | `src/<package>/`, `tests/`, `pyproject.toml` |
+| C# / .NET 10 | `dotnet build` · `dotnet test` (xUnit) · `dotnet format` | `<Name>.slnx`, `src/<Name>.*/`, `tests/<Name>.*.Tests/`, `Directory.Build.props` |
+| C++20 | `cmake --preset dev` · `ctest --preset dev` (GoogleTest) · `clang-format` | `CMakeLists.txt`, `CMakePresets.json`, `include/`, `src/`, `apps/`, `tests/` |
 
-Every push runs each project's tests automatically with GitHub Actions.
+Every push runs GitHub Actions, which finds each project by its build file and runs:
+- **Python:** lint, format check, tests
+- **C#:** format check, Release build with warnings as errors, tests
+- **C++:** format check, then a debug build with AddressSanitizer and UndefinedBehaviorSanitizer and the tests, on both GCC and Clang
+- **Docker:** any project with a Dockerfile also gets its image built
 
 ## License
 

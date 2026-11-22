@@ -9,15 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       projects: ${{ steps.find.outputs.projects }}
+      dotnet: ${{ steps.find.outputs.dotnet }}
+      cpp: ${{ steps.find.outputs.cpp }}
     steps:
       - uses: actions/checkout@v4
       - id: find
         run: |
-          projects=$(find . -mindepth 2 -maxdepth 2 -name pyproject.toml -printf '%h\n' \
-            | sed 's|^\./||' | sort | jq -R . | jq -cs .)
-          echo "projects=$projects" >> "$GITHUB_OUTPUT"
+          # A project is a top-level folder; its language is decided by its build file.
+          to_json() { sed 's|^\./||' | sort -u | jq -R . | jq -cs .; }
+          python=$(find . -mindepth 2 -maxdepth 2 -name pyproject.toml -printf '%h\n' | to_json)
+          dotnet=$(find . -mindepth 2 -maxdepth 2 \( -name '*.sln' -o -name '*.slnx' \) -printf '%h\n' | to_json)
+          cpp=$(find . -mindepth 2 -maxdepth 2 -name CMakeLists.txt -printf '%h\n' | to_json)
+          echo "projects=$python" >> "$GITHUB_OUTPUT"
+          echo "dotnet=$dotnet" >> "$GITHUB_OUTPUT"
+          echo "cpp=$cpp" >> "$GITHUB_OUTPUT"
+          echo "Python: $python"; echo "C#: $dotnet"; echo "C++: $cpp"
 
   test:
+    name: python (${{ matrix.project }})
     needs: discover
     if: needs.discover.outputs.projects != '[]'
     runs-on: ubuntu-latest
@@ -39,4 +48,63 @@ jobs:
       - run: pytest -q
       - name: Build Docker image (if the project has one)
         if: hashFiles(format('{0}/Dockerfile', matrix.project)) != ''
+        run: docker build -t "${{ matrix.project }}" .
+
+  dotnet:
+    name: csharp (${{ matrix.project }})
+    needs: discover
+    if: needs.discover.outputs.dotnet != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.dotnet) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    env:
+      DOTNET_NOLOGO: "1"
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - run: dotnet restore
+      - run: dotnet format --verify-no-changes --no-restore
+      - run: dotnet build --no-restore -c Release -warnaserror
+      - run: dotnet test --no-build -c Release
+      - name: Build Docker image (if the project has one)
+        if: hashFiles(format('{0}/Dockerfile', matrix.project)) != ''
+        run: docker build -t "${{ matrix.project }}" .
+
+  cpp:
+    name: cpp (${{ matrix.project }}, ${{ matrix.compiler }})
+    needs: discover
+    if: needs.discover.outputs.cpp != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.cpp) }}
+        compiler: [gcc, clang]
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -q && sudo apt-get install -y -q ninja-build
+      - run: pipx install clang-format==19.1.7  # pinned so local and CI formatting agree
+      - name: Check formatting
+        run: |
+          files=$(git ls-files '*.cpp' '*.hpp' '*.h' '*.cc' '*.ipp')
+          if [ -n "$files" ]; then clang-format --dry-run --Werror $files; fi
+      - name: Configure (Debug + AddressSanitizer/UBSan)
+        run: |
+          if [ "${{ matrix.compiler }}" = clang ]; then export CC=clang CXX=clang++; else export CC=gcc CXX=g++; fi
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_SANITIZERS=ON
+      - run: cmake --build build --parallel
+      - run: ctest --test-dir build --output-on-failure
+      - name: Build Docker image (if the project has one)
+        if: matrix.compiler == 'gcc' && hashFiles(format('{0}/Dockerfile', matrix.project)) != ''
         run: docker build -t "${{ matrix.project }}" .
