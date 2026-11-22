@@ -17,18 +17,22 @@ Every project solves a realistic business problem, ships with tests and its own 
 
 ## Languages and layout
 
-Projects are written in **Python**, **C# (.NET 10)** and **C++20**. Each one lives in its own folder with a README, an architecture write-up (`docs/ARCHITECTURE.md`), tests and an MIT licence.
+Projects are written in **Python**, **C# (.NET 10)**, **C++20** and **SQL** (dbt on DuckDB, and PostgreSQL). Each one lives in its own folder with a README, an architecture write-up (`docs/ARCHITECTURE.md`), tests and an MIT licence.
 
 | Language | Build and test | Structure |
 |---|---|---|
 | Python | `pip install -e ".[dev]"` · `pytest` · `ruff` | `src/<package>/`, `tests/`, `pyproject.toml` |
 | C# / .NET 10 | `dotnet build` · `dotnet test` (xUnit) · `dotnet format` | `<Name>.slnx`, `src/<Name>.*/`, `tests/<Name>.*.Tests/`, `Directory.Build.props` |
 | C++20 | `cmake --preset dev` · `ctest --preset dev` (GoogleTest) · `clang-format` | `CMakeLists.txt`, `CMakePresets.json`, `include/`, `src/`, `apps/`, `tests/` |
+| SQL: dbt + DuckDB | `dbt build` (models, data tests, unit tests) · `sqlfluff lint` | `dbt_project.yml`, `models/staging`, `models/marts`, `macros/`, `tests/` |
+| SQL: PostgreSQL 17 | `scripts/test.sh` (throwaway database, migrations, SQL assertion tests) · `sqlfluff lint` | `db/migrations/V###__*.sql`, `tests/test_*.sql`, `scripts/` |
 
 Every push runs GitHub Actions, which finds each project by its build file and runs:
 - **Python:** lint, format check, tests
 - **C#:** format check, Release build with warnings as errors, tests
 - **C++:** format check, then a debug build with AddressSanitizer and UndefinedBehaviorSanitizer and the tests, on both GCC and Clang
+- **SQL (dbt):** SQLFluff lint, then `dbt build` with all models, data tests and unit tests on DuckDB
+- **SQL (PostgreSQL):** SQLFluff lint, then migrations applied to a fresh PostgreSQL 17 database and the SQL tests run
 - **Docker:** any project with a Dockerfile also gets its image built
 
 ## License

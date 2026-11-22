@@ -11,6 +11,8 @@ jobs:
       projects: ${{ steps.find.outputs.projects }}
       dotnet: ${{ steps.find.outputs.dotnet }}
       cpp: ${{ steps.find.outputs.cpp }}
+      dbt: ${{ steps.find.outputs.dbt }}
+      postgres: ${{ steps.find.outputs.postgres }}
     steps:
       - uses: actions/checkout@v4
       - id: find
@@ -20,10 +22,16 @@ jobs:
           python=$(find . -mindepth 2 -maxdepth 2 -name pyproject.toml -printf '%h\n' | to_json)
           dotnet=$(find . -mindepth 2 -maxdepth 2 \( -name '*.sln' -o -name '*.slnx' \) -printf '%h\n' | to_json)
           cpp=$(find . -mindepth 2 -maxdepth 2 -name CMakeLists.txt -printf '%h\n' | to_json)
+          dbt=$(find . -mindepth 2 -maxdepth 2 -name dbt_project.yml -printf '%h\n' | to_json)
+          postgres=$(find . -mindepth 3 -maxdepth 3 -type d -path './*/db/migrations' -printf '%h\n' \
+            | xargs -r -n1 dirname | to_json)
           echo "projects=$python" >> "$GITHUB_OUTPUT"
+          echo "dbt=$dbt" >> "$GITHUB_OUTPUT"
+          echo "postgres=$postgres" >> "$GITHUB_OUTPUT"
           echo "dotnet=$dotnet" >> "$GITHUB_OUTPUT"
           echo "cpp=$cpp" >> "$GITHUB_OUTPUT"
           echo "Python: $python"; echo "C#: $dotnet"; echo "C++: $cpp"
+          echo "SQL (dbt): $dbt"; echo "SQL (PostgreSQL): $postgres"
 
   test:
     name: python (${{ matrix.project }})
@@ -108,3 +116,57 @@ jobs:
       - name: Build Docker image (if the project has one)
         if: matrix.compiler == 'gcc' && hashFiles(format('{0}/Dockerfile', matrix.project)) != ''
         run: docker build -t "${{ matrix.project }}" .
+
+  dbt:
+    name: sql-dbt (${{ matrix.project }})
+    needs: discover
+    if: needs.discover.outputs.dbt != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.dbt) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: dbt deps --profiles-dir .
+        if: hashFiles(format('{0}/packages.yml', matrix.project)) != ''
+      - name: Lint SQL (SQLFluff, dbt templater)
+        run: sqlfluff lint $(ls -d models tests analyses snapshots 2>/dev/null)
+      - name: Build models and run data + unit tests
+        run: dbt build --profiles-dir .
+
+  postgres:
+    name: sql-postgres (${{ matrix.project }})
+    needs: discover
+    if: needs.discover.outputs.postgres != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.postgres) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PostgreSQL 17
+        run: |
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -y -q postgresql-17
+      - run: pip install -r requirements.txt
+      - name: Lint SQL (SQLFluff, postgres dialect)
+        run: sqlfluff lint db tests
+      - name: Migrate a throwaway database and run SQL tests
+        run: ./scripts/test.sh
+        env:
+          PG_BIN: /usr/lib/postgresql/17/bin
