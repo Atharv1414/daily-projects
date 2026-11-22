@@ -12,6 +12,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 002 | 2026-11-21 | [🏨 Hotel Revenue SQL Agent](hotel-revenue-sql-agent/) | Agentic AI Engineer | Python, Claude tool use (Anthropic SDK), SQLite guardrails, Pydantic, evals, tracing |
 | 003 | 2026-11-21 | [⚡ Smart Meter Lakehouse](smart-meter-lakehouse/) | Data Engineer | Python, DuckDB (SCD2, ASOF joins), PyArrow/Parquet, Pydantic, DAG runner |
 | 004 | 2026-11-21 | [🏥 NHS Outpatient DNA Analysis](nhs-outpatient-dna-analysis/) | Data Analyst | Python, pandas, statsmodels (RCT, logistic regression, forecasting), SciPy, matplotlib |
+| 005 | 2026-11-22 | [📶 Broadband Support Agent](broadband-support-agent/) | Agentic AI Engineer | Python, Claude tool use (Anthropic SDK), policy engine, human approval + hand-off, injection guardrails, evals |
 
 ## Languages and layout
 

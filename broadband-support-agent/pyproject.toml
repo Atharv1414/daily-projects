@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "broadband-support-agent"
+version = "1.0.0"
+description = "Customer-support agent for a UK broadband provider: Claude tool use, policy engine, human approval, hand-off, injection guardrails, tracing and evals"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Atharv Patil" }]
+requires-python = ">=3.11"
+dependencies = ["anthropic>=0.70", "pydantic>=2.6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "hypothesis>=6.100"]
+
+[project.scripts]
+support-agent = "broadband_support_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
