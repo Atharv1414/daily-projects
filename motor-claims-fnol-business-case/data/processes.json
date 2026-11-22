@@ -1,0 +1,28 @@
+{
+ "current": {
+  "title": "Current state: phone FNOL",
+  "steps": [
+   {"id": "C1", "name": "Customer calls claims line", "lane": "Customer", "work_min": 2, "wait_min": 11, "value_add": false},
+   {"id": "C2", "name": "Handler takes FNOL details by phone", "lane": "Contact centre", "work_min": 24, "wait_min": 0, "value_add": true},
+   {"id": "C3", "name": "Handler re-keys claim into claims system", "lane": "Contact centre", "work_min": 6, "wait_min": 0, "value_add": false},
+   {"id": "C4", "name": "Customer emails photos", "lane": "Customer", "work_min": 10, "wait_min": 1440, "value_add": false},
+   {"id": "C5", "name": "Photos matched to claim manually", "lane": "Claims admin", "work_min": 8, "wait_min": 720, "value_add": false},
+   {"id": "C6", "name": "Handler triages and calls customer back", "lane": "Claims handler", "work_min": 15, "wait_min": 1080, "value_add": true},
+   {"id": "C7", "name": "Repairer instructed", "lane": "Claims handler", "work_min": 10, "wait_min": 480, "value_add": true},
+   {"id": "C8", "name": "Repairer confirms booking", "lane": "Repairer", "work_min": 5, "wait_min": 1440, "value_add": false}
+  ],
+  "flows": [["C1","C2"],["C2","C3"],["C3","C4"],["C4","C5"],["C5","C6"],["C6","C7"],["C7","C8"]]
+ },
+ "future": {
+  "title": "Future state: digital FNOL with straight-through routing",
+  "steps": [
+   {"id": "F1", "name": "Customer reports claim in app with photos", "lane": "Customer", "work_min": 9, "wait_min": 0, "value_add": true},
+   {"id": "F2", "name": "Claim created via API, fraud and triage rules run", "lane": "System", "work_min": 1, "wait_min": 0, "value_add": true},
+   {"id": "F3", "name": "Simple claim: repairer auto-instructed", "lane": "System", "work_min": 1, "wait_min": 60, "value_add": true},
+   {"id": "F4", "name": "Complex claim: handler reviews submission", "lane": "Claims handler", "work_min": 6, "wait_min": 240, "value_add": true},
+   {"id": "F5", "name": "Repairer confirms booking, customer gets SMS", "lane": "Repairer", "work_min": 5, "wait_min": 480, "value_add": false}
+  ],
+  "flows": [["F1","F2"],["F2","F3","simple"],["F2","F4","complex / flagged"],["F3","F5"],["F4","F5"]],
+  "simple_share": 0.6
+ }
+}

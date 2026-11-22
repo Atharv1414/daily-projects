@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "motor-claims-fnol-business-case"
+version = "1.0.0"
+description = "Business case for digital FNOL at a UK motor insurer: pilot evaluation (DiD), NPV/IRR model with sensitivity and Monte Carlo, process maps, RACI, MoSCoW backlog with Gherkin, risk register"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Atharv Patil" }]
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "pandas>=2.2", "scipy>=1.11", "matplotlib>=3.8", "pydantic>=2.6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "hypothesis>=6.100"]
+
+[project.scripts]
+fnol-case = "fnol_business_case.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# Markdown report template: table rows inside an f-string cannot be wrapped.
+"src/fnol_business_case/report.py" = ["E501"]

@@ -1,0 +1,26 @@
+{
+ "stakeholders": [
+  {"name": "Claims Director", "role": "Sponsor", "power": 5, "interest": 5, "stance": "Supportive", "concern": "Cycle time and hire costs"},
+  {"name": "Head of Claims Operations", "role": "Business owner", "power": 4, "interest": 5, "stance": "Supportive", "concern": "Handler workload during transition"},
+  {"name": "Contact Centre Manager", "role": "Impacted team lead", "power": 3, "interest": 5, "stance": "Concerned", "concern": "Headcount and role changes"},
+  {"name": "Chief Information Officer", "role": "Technology owner", "power": 5, "interest": 3, "stance": "Neutral", "concern": "Integration risk with the claims system"},
+  {"name": "Finance Business Partner", "role": "Benefits owner", "power": 4, "interest": 3, "stance": "Neutral", "concern": "Benefits realisation evidence"},
+  {"name": "Counter-Fraud Lead", "role": "Subject expert", "power": 2, "interest": 4, "stance": "Supportive", "concern": "Fraud rules at notification"},
+  {"name": "Data Protection Officer", "role": "Control owner", "power": 4, "interest": 2, "stance": "Neutral", "concern": "Photo and location data"},
+  {"name": "Approved Repairer Network", "role": "External partner", "power": 2, "interest": 4, "stance": "Supportive", "concern": "Job volumes and SLAs"},
+  {"name": "Brokers", "role": "Distribution partner", "power": 3, "interest": 2, "stance": "Neutral", "concern": "Channel conflict"},
+  {"name": "Customers", "role": "End users", "power": 2, "interest": 3, "stance": "Supportive", "concern": "Ease of reporting and updates"},
+  {"name": "Compliance (Consumer Duty)", "role": "Control owner", "power": 4, "interest": 3, "stance": "Neutral", "concern": "Fair value and vulnerable customers"}
+ ],
+ "raci": {
+  "Approve business case": {"Claims Director": "A", "Finance Business Partner": "R", "Chief Information Officer": "C", "Head of Claims Operations": "C"},
+  "Define requirements": {"Head of Claims Operations": "A", "Contact Centre Manager": "C", "Counter-Fraud Lead": "C", "Customers": "C", "Brokers": "I"},
+  "Build and integrate platform": {"Chief Information Officer": "A", "Head of Claims Operations": "C", "Data Protection Officer": "C"},
+  "Data protection impact assessment": {"Data Protection Officer": "A", "Chief Information Officer": "C"},
+  "Consumer Duty and vulnerability review": {"Compliance (Consumer Duty)": "A", "Head of Claims Operations": "R", "Customers": "C"},
+  "Handler training and change": {"Head of Claims Operations": "A", "Contact Centre Manager": "R"},
+  "Repairer onboarding": {"Head of Claims Operations": "A", "Approved Repairer Network": "R"},
+  "Benefits tracking": {"Claims Director": "A", "Finance Business Partner": "R", "Head of Claims Operations": "R"},
+  "Go-live decision": {"Claims Director": "A", "Chief Information Officer": "R", "Compliance (Consumer Duty)": "C", "Contact Centre Manager": "I", "Brokers": "I"}
+ }
+}

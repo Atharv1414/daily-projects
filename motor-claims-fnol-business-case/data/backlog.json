@@ -1,0 +1,464 @@
+[
+ {
+  "id": "FNOL-01",
+  "epic": "Digital claim notification",
+  "as_a": "policyholder who has just had an accident",
+  "i_want": "to report my claim in the app in under 10 minutes",
+  "so_that": "I don't have to wait on hold to start my claim",
+  "moscow": "Must",
+  "points": 8,
+  "business_value": 10,
+  "time_criticality": 8,
+  "risk_reduction": 5,
+  "depends_on": [
+   "FNOL-04"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Policyholder submits a complete claim",
+    "given": [
+     "I am logged in with an active motor policy",
+     "the incident date is within my policy period"
+    ],
+    "when": [
+     "I complete every mandatory step and press Submit"
+    ],
+    "then": [
+     "a claim reference starting AMC- is shown",
+     "a confirmation email is sent within 5 minutes",
+     "the claim appears in the handler work queue"
+    ]
+   },
+   {
+    "scenario": "Incident outside the policy period",
+    "given": [
+     "my policy lapsed before the incident date"
+    ],
+    "when": [
+     "I enter the incident date"
+    ],
+    "then": [
+     "I am told the policy was not active on that date",
+     "I am offered a call-back instead of continuing"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-02",
+  "epic": "Digital claim notification",
+  "as_a": "policyholder",
+  "i_want": "to upload photos of the damage during notification",
+  "so_that": "my claim can be assessed without an inspection visit",
+  "moscow": "Must",
+  "points": 5,
+  "business_value": 9,
+  "time_criticality": 6,
+  "risk_reduction": 6,
+  "depends_on": [
+   "FNOL-01"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Valid photos uploaded",
+    "given": [
+     "I am on the damage step"
+    ],
+    "when": [
+     "I upload between 2 and 12 JPEG or HEIC photos under 15 MB each"
+    ],
+    "then": [
+     "thumbnails are shown",
+     "photos are stored against the claim with EXIF timestamp and location"
+    ]
+   },
+   {
+    "scenario": "Photo too large",
+    "given": [
+     "I am on the damage step"
+    ],
+    "when": [
+     "I upload a 40 MB file"
+    ],
+    "then": [
+     "I see 'Photos must be under 15 MB'",
+     "the file is not stored"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-03",
+  "epic": "Triage and routing",
+  "as_a": "claims operations manager",
+  "i_want": "simple claims routed straight to an approved repairer",
+  "so_that": "cycle time and hire-car days fall",
+  "moscow": "Must",
+  "points": 8,
+  "business_value": 9,
+  "time_criticality": 7,
+  "risk_reduction": 4,
+  "depends_on": [
+   "FNOL-01"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Simple claim routed automatically",
+    "given": [
+     "a single-vehicle claim with no injury and no third party",
+     "estimated damage under £3,000"
+    ],
+    "when": [
+     "the claim is submitted"
+    ],
+    "then": [
+     "it is assigned to the nearest approved repairer within 1 hour",
+     "no handler call is created"
+    ]
+   },
+   {
+    "scenario": "Injury reported",
+    "given": [
+     "the customer ticks 'someone was injured'"
+    ],
+    "when": [
+     "the claim is submitted"
+    ],
+    "then": [
+     "the claim goes to the injury team queue",
+     "a handler call is scheduled within 4 working hours"
+    ]
+   },
+   {
+    "scenario": "Claim above the straight-through value cap",
+    "given": [
+     "estimated damage is £3,000 or more"
+    ],
+    "when": [
+     "the claim is submitted"
+    ],
+    "then": [
+     "the claim goes to a handler for review",
+     "the customer is told a handler will call within 1 working day"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-04",
+  "epic": "Platform and integration",
+  "as_a": "claims handler",
+  "i_want": "digital claims created in the core claims system automatically",
+  "so_that": "I never re-key data",
+  "moscow": "Must",
+  "points": 13,
+  "business_value": 8,
+  "time_criticality": 9,
+  "risk_reduction": 8,
+  "depends_on": [],
+  "acceptance": [
+   {
+    "scenario": "Claim created via API",
+    "given": [
+     "the claims system API is available"
+    ],
+    "when": [
+     "a digital claim is submitted"
+    ],
+    "then": [
+     "a claim record is created with all FNOL fields mapped",
+     "the API call is retried up to 3 times on failure"
+    ]
+   },
+   {
+    "scenario": "Claims system unavailable",
+    "given": [
+     "the claims system API returns errors for 10 minutes"
+    ],
+    "when": [
+     "a digital claim is submitted"
+    ],
+    "then": [
+     "the claim is queued and the customer still receives a reference",
+     "an alert is raised to IT support"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-05",
+  "epic": "Triage and routing",
+  "as_a": "counter-fraud analyst",
+  "i_want": "fraud indicators scored at notification",
+  "so_that": "suspicious claims are referred before payment",
+  "moscow": "Should",
+  "points": 8,
+  "business_value": 7,
+  "time_criticality": 5,
+  "risk_reduction": 8,
+  "depends_on": [
+   "FNOL-02"
+  ],
+  "acceptance": [
+   {
+    "scenario": "High-risk claim referred",
+    "given": [
+     "the photo EXIF date is more than 7 days before the stated incident date"
+    ],
+    "when": [
+     "the claim is scored"
+    ],
+    "then": [
+     "the claim is flagged for counter-fraud review",
+     "straight-through routing is blocked"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-06",
+  "epic": "Customer communication",
+  "as_a": "policyholder",
+  "i_want": "status updates by SMS and in the app",
+  "so_that": "I don't have to chase my claim",
+  "moscow": "Should",
+  "points": 5,
+  "business_value": 6,
+  "time_criticality": 4,
+  "risk_reduction": 3,
+  "depends_on": [
+   "FNOL-04"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Repairer booked",
+    "given": [
+     "my claim has been routed to a repairer"
+    ],
+    "when": [
+     "the repairer accepts the job"
+    ],
+    "then": [
+     "I receive an SMS with the repairer name and booking date"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-07",
+  "epic": "Accessibility and vulnerability",
+  "as_a": "customer with a disability",
+  "i_want": "the claim journey to meet WCAG 2.2 AA",
+  "so_that": "I can report a claim independently",
+  "moscow": "Must",
+  "points": 5,
+  "business_value": 7,
+  "time_criticality": 7,
+  "risk_reduction": 7,
+  "depends_on": [
+   "FNOL-01"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Screen reader journey",
+    "given": [
+     "I use VoiceOver"
+    ],
+    "when": [
+     "I complete the claim journey"
+    ],
+    "then": [
+     "every control has an accessible name",
+     "no step requires a mouse"
+    ]
+   },
+   {
+    "scenario": "Vulnerability declared",
+    "given": [
+     "I indicate I need extra support"
+    ],
+    "when": [
+     "I submit the claim"
+    ],
+    "then": [
+     "the claim is routed to the vulnerable customer team",
+     "straight-through processing is disabled"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-08",
+  "epic": "Customer communication",
+  "as_a": "broker",
+  "i_want": "to notify claims for my clients through a portal",
+  "so_that": "broker claims also benefit from faster cycle times",
+  "moscow": "Could",
+  "points": 8,
+  "business_value": 5,
+  "time_criticality": 2,
+  "risk_reduction": 2,
+  "depends_on": [
+   "FNOL-04"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Broker notifies a claim",
+    "given": [
+     "I am an authorised broker user"
+    ],
+    "when": [
+     "I submit a claim for a client"
+    ],
+    "then": [
+     "the policyholder is notified by email",
+     "the claim is linked to my agency code"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-09",
+  "epic": "Triage and routing",
+  "as_a": "claims handler",
+  "i_want": "AI damage estimates from photos",
+  "so_that": "reserves are set accurately on day one",
+  "moscow": "Won't",
+  "points": 13,
+  "business_value": 6,
+  "time_criticality": 1,
+  "risk_reduction": 3,
+  "depends_on": [
+   "FNOL-02"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Deferred to phase 2",
+    "given": [
+     "phase 1 is live"
+    ],
+    "when": [
+     "photo volumes exceed 20,000"
+    ],
+    "then": [
+     "a vendor evaluation is started"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-10",
+  "epic": "Management information",
+  "as_a": "claims director",
+  "i_want": "a weekly dashboard of digital take-up, cycle time and hire days",
+  "so_that": "I can track benefits against the business case",
+  "moscow": "Must",
+  "points": 3,
+  "business_value": 8,
+  "time_criticality": 6,
+  "risk_reduction": 6,
+  "depends_on": [
+   "FNOL-04"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Weekly benefits report",
+    "given": [
+     "it is Monday 08:00"
+    ],
+    "when": [
+     "the reporting job runs"
+    ],
+    "then": [
+     "take-up, mean cycle days and hire days are reported by region",
+     "variance against business-case targets is shown"
+    ]
+   },
+   {
+    "scenario": "Source data late",
+    "given": [
+     "the claims system extract has not arrived by 07:00"
+    ],
+    "when": [
+     "the reporting job runs"
+    ],
+    "then": [
+     "the report is published with a 'data incomplete' banner",
+     "the MI team is alerted"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-11",
+  "epic": "Digital claim notification",
+  "as_a": "policyholder",
+  "i_want": "to save a part-completed claim and return later",
+  "so_that": "I can finish when I'm somewhere safe",
+  "moscow": "Should",
+  "points": 3,
+  "business_value": 5,
+  "time_criticality": 3,
+  "risk_reduction": 2,
+  "depends_on": [
+   "FNOL-01"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Resume a draft",
+    "given": [
+     "I saved a draft claim less than 7 days ago"
+    ],
+    "when": [
+     "I reopen the app"
+    ],
+    "then": [
+     "I am taken back to the step I left"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "FNOL-12",
+  "epic": "Platform and integration",
+  "as_a": "data protection officer",
+  "i_want": "claim photos and personal data retained per policy",
+  "so_that": "we comply with UK GDPR",
+  "moscow": "Must",
+  "points": 3,
+  "business_value": 6,
+  "time_criticality": 8,
+  "risk_reduction": 9,
+  "depends_on": [
+   "FNOL-02"
+  ],
+  "acceptance": [
+   {
+    "scenario": "Retention applied",
+    "given": [
+     "a claim closed more than 6 years ago"
+    ],
+    "when": [
+     "the retention job runs"
+    ],
+    "then": [
+     "photos and personal data are deleted",
+     "the deletion is logged for audit"
+    ]
+   },
+   {
+    "scenario": "Claim under litigation hold",
+    "given": [
+     "a closed claim more than 6 years old is flagged for litigation hold"
+    ],
+    "when": [
+     "the retention job runs"
+    ],
+    "then": [
+     "its data is kept",
+     "the hold reason is logged"
+    ]
+   }
+  ]
+ }
+]
