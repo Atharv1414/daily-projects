@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: raw_campaigns
+    description: Campaign catalogue from Google Ads, Microsoft Ads, Meta, TikTok, Criteo, Awin and Klaviyo.
+    columns:
+      - name: campaign_id
+        data_tests: [unique, not_null]
+      - name: utm_campaign
+        data_tests: [unique]
+  - name: gen_sessions
+    description: >
+      Generator internals: the ground-truth journeys behind the raw feeds. Not read by any
+      staging model; used only to keep raw feeds consistent and to validate sessionisation.
+    columns:
+      - name: true_session_id
+        data_tests: [unique, not_null]
+  - name: raw_web_hits
+    description: Page-view clickstream from the tracking tag (no session id; includes bots and duplicates).
+  - name: raw_orders
+    description: Shop-platform order export (includes webhook re-sends and test orders).
+  - name: raw_logins
+    description: Sign-in events linking a device's anonymous id to a customer.
+  - name: raw_ad_spend
+    description: Daily cost per campaign from the ad platforms, including restated rows.

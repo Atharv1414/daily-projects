@@ -17,6 +17,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 007 | 2026-11-22 | [🚗 Motor Claims Digital FNOL Business Case](motor-claims-fnol-business-case/) | Business Analyst | Python, difference-in-differences, NPV/IRR + Monte Carlo, process maps, RACI, MoSCoW + Gherkin |
 | 008 | 2026-11-23 | [📦 Warehouse Stock Reservation API](warehouse-stock-reservation-api/) | Software Engineer | C# / .NET 10, ASP.NET Core minimal APIs, EF Core + SQLite (optimistic concurrency, migrations), JWT + roles, transactional outbox, xUnit |
 | 009 | 2026-11-23 | [📺 Streaming QoE Pipeline](streaming-qoe-pipeline/) | Data Engineer | Python, event-time stream processing (watermarks, tumbling/hopping/session windows), DuckDB exactly-once checkpoints, Pydantic, Hypothesis |
+| 010 | 2026-11-23 | [🧭 E-commerce Marketing Attribution](ecommerce-marketing-attribution/) | Data Analyst | SQL (dbt + DuckDB): sessionisation, ASOF identity stitching, 6 attribution models, lift z-tests, cohorts, ROLLUP; 79 dbt tests |
 
 ## Languages and layout
 

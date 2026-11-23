@@ -1,0 +1,100 @@
+version: 2
+
+models:
+  - name: dim_channel
+    description: Marketing channels with the paid / owned / earned grouping.
+    columns:
+      - name: channel
+        data_tests: [unique, not_null]
+      - name: channel_group
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["paid", "owned", "earned"]
+
+  - name: fct_orders
+    description: Order grain with journey context (first/last touch, path length, days to convert).
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: net_revenue_gbp
+        data_tests: [non_negative]
+      - name: first_touch_channel
+        data_tests: [not_null]
+
+  - name: fct_attributed_conversions
+    description: Credit and revenue per order, touch and attribution model.
+    columns:
+      - name: attribution_id
+        data_tests: [unique, not_null]
+      - name: channel
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_channel')
+                field: channel
+      - name: order_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
+
+  - name: mart_channel_attribution
+    description: >
+      Channel x model scorecard. `roas` = attributed revenue / spend; `cpa_gbp` = spend /
+      attributed conversions; `revenue_vs_last_touch_gbp` = how far the model moves the
+      channel's credit from last-touch.
+    meta:
+      metrics:
+        roas: sum(attributed_revenue_gbp) / sum(spend_gbp)
+        cpa_gbp: sum(spend_gbp) / sum(conversion_credit)
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: ["channel", "model"]
+    columns:
+      - name: roas
+        data_tests: [non_negative]
+      - name: revenue_share
+        data_tests: [not_null]
+
+  - name: mart_campaign_daily
+    description: Campaign x day spend, sessions and position-based revenue with running and 7-day rolling ROAS.
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: ["campaign_id", "spend_date"]
+    columns:
+      - name: cumulative_spend_gbp
+        data_tests: [non_negative]
+
+  - name: mart_conversion_paths
+    description: Top 50 converting channel paths (consecutive repeats collapsed).
+    columns:
+      - name: channel_path
+        data_tests: [unique, not_null]
+
+  - name: mart_channel_lift
+    description: Conversion rate of journeys with vs without each channel, with a two-proportion z-score.
+    columns:
+      - name: channel
+        data_tests: [unique, not_null]
+
+  - name: mart_customer_cohorts
+    description: First-order-month x first-touch-channel cohorts with cumulative revenue per customer.
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: ["cohort_month", "first_touch_channel", "months_since_first_order"]
+
+  - name: mart_monthly_rollup
+    description: GROUPING SETS rollup of position-based revenue and spend by month, channel group and channel.
+    columns:
+      - name: grouping_level
+        description: 0 = month x group x channel, 1 = month x group, 3 = month, 4 = group x channel, 7 = grand total.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1, 3, 4, 7]
+                quote: false

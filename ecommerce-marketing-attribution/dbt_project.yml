@@ -1,0 +1,36 @@
+name: marketing_attribution
+version: "1.0.0"
+config-version: 2
+profile: marketing_attribution
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+target-path: target
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  # Volume knob: dbt build --vars '{visitor_count: 240000}'
+  visitor_count: 60000
+  start_date: "2026-06-01"
+  days: 153                     # 1 June - 31 October 2026
+  lookback_days: 30             # attribution window before a conversion
+  session_timeout_minutes: 30   # GA-style inactivity timeout
+  time_decay_half_life_days: 7
+
+models:
+  marketing_attribution:
+    generated:
+      +materialized: table
+      +schema: raw
+      +tags: ["generator"]
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts

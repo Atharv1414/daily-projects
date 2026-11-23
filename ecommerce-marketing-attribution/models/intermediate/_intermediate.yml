@@ -1,0 +1,166 @@
+version: 2
+
+models:
+  - name: int_sessions
+    description: >
+      Visits rebuilt from page views (30-minute inactivity timeout or a new campaign /
+      referrer entrance starts a session), with the default channel grouping applied.
+      Incremental (delete+insert) with a one-day re-sessionisation window.
+    columns:
+      - name: session_id
+        data_tests: [unique, not_null]
+      - name: channel
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_channel')
+                field: channel
+      - name: page_views
+        data_tests: [not_null, non_negative]
+
+  - name: int_sessions_stitched
+    description: Sessions with the customer resolved through ASOF joins on sign-in history.
+    columns:
+      - name: session_id
+        data_tests: [unique]
+      - name: identity_source
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["signed_in", "back_filled", "anonymous"]
+
+  - name: int_conversions
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+
+  - name: int_conversion_paths
+    description: Touches in the 30-day lookback window before each order (after the previous order).
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: ["order_id", "session_id"]
+
+  - name: int_attribution_weights
+    description: Long-format credit per order, touch and attribution model.
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: ["order_id", "session_id", "model"]
+    columns:
+      - name: weight
+        data_tests:
+          - non_negative
+          - weights_sum_to_one:
+              arguments:
+                group_by: ["order_id", "model"]
+      - name: model
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["first_touch", "last_touch", "last_non_direct", "linear", "time_decay", "position_based"]
+
+unit_tests:
+  - name: sessionisation_splits_on_timeout_and_new_entrance
+    model: int_sessions
+    overrides:
+      macros:
+        is_incremental: false
+    given:
+      - input: ref('stg_web_hits')
+        rows:
+          - {hit_id: h1, anonymous_id: a1, hit_at: "2026-07-01 20:00:00", page_path: /p/1, utm_source: google, utm_medium: cpc, utm_campaign: brand_core, referrer_domain: null, is_conversion_page: false}
+          - {hit_id: h2, anonymous_id: a1, hit_at: "2026-07-01 20:20:00", page_path: /p/2, is_conversion_page: false}
+          - {hit_id: h3, anonymous_id: a1, hit_at: "2026-07-01 20:55:00", page_path: /p/3, is_conversion_page: false}
+          - {hit_id: h4, anonymous_id: a1, hit_at: "2026-07-01 20:57:00", page_path: /p/4, utm_source: klaviyo, utm_medium: email, utm_campaign: weekly_newsletter, is_conversion_page: false}
+          - {hit_id: h5, anonymous_id: a1, hit_at: "2026-07-01 20:59:00", page_path: /checkout/confirmation, is_conversion_page: true}
+          - {hit_id: h6, anonymous_id: a2, hit_at: "2026-07-01 20:00:00", page_path: /, referrer_domain: www.google.co.uk, is_conversion_page: false}
+      - input: ref('stg_campaigns')
+        rows:
+          - {campaign_id: GADS-BR-01, utm_campaign: brand_core}
+          - {campaign_id: KLAV-EM-01, utm_campaign: weekly_newsletter}
+    expect:
+      rows:
+        - {anonymous_id: a1, session_start: "2026-07-01 20:00:00", page_views: 2, channel: paid_search_brand, campaign_id: GADS-BR-01, reached_confirmation: false}
+        - {anonymous_id: a1, session_start: "2026-07-01 20:55:00", page_views: 1, channel: direct, campaign_id: null, reached_confirmation: false}
+        - {anonymous_id: a1, session_start: "2026-07-01 20:57:00", page_views: 2, channel: email, campaign_id: KLAV-EM-01, reached_confirmation: true}
+        - {anonymous_id: a2, session_start: "2026-07-01 20:00:00", page_views: 1, channel: organic_search, campaign_id: null, reached_confirmation: false}
+
+  - name: identity_stitching_credits_whoever_was_signed_in
+    model: int_sessions_stitched
+    given:
+      - input: ref('int_sessions')
+        rows:
+          - {session_id: s1, anonymous_id: ipad, session_start: "2026-07-01 09:00:00", session_end: "2026-07-01 09:10:00"}
+          - {session_id: s2, anonymous_id: ipad, session_start: "2026-07-05 20:00:00", session_end: "2026-07-05 20:20:00"}
+          - {session_id: s3, anonymous_id: ipad, session_start: "2026-07-09 20:00:00", session_end: "2026-07-09 20:20:00"}
+          - {session_id: s4, anonymous_id: phone, session_start: "2026-07-09 20:00:00", session_end: "2026-07-09 20:20:00"}
+      - input: ref('stg_logins')
+        rows:
+          - {anonymous_id: ipad, customer_id: MUM, logged_in_at: "2026-07-05 20:10:00"}
+          - {anonymous_id: ipad, customer_id: TEEN, logged_in_at: "2026-07-08 18:00:00"}
+    expect:
+      rows:
+        - {session_id: s1, customer_id: MUM, identity_source: back_filled}
+        - {session_id: s2, customer_id: MUM, identity_source: signed_in}
+        - {session_id: s3, customer_id: TEEN, identity_source: signed_in}
+        - {session_id: s4, customer_id: null, identity_source: anonymous}
+
+  - name: paths_respect_lookback_and_previous_order
+    model: int_conversion_paths
+    given:
+      - input: ref('int_conversions')
+        rows:
+          - {order_id: O1, customer_id: C1, ordered_at: "2026-08-01 12:00:00", net_revenue_gbp: 50, order_sequence: 1, previous_ordered_at: null}
+          - {order_id: O2, customer_id: C1, ordered_at: "2026-08-20 12:00:00", net_revenue_gbp: 70, order_sequence: 2, previous_ordered_at: "2026-08-01 12:00:00"}
+      - input: ref('int_sessions_stitched')
+        rows:
+          - {session_id: too_old, customer_id: C1, session_start: "2026-06-15 12:00:00", channel: display}
+          - {session_id: first_a, customer_id: C1, session_start: "2026-07-20 12:00:00", channel: paid_social}
+          - {session_id: first_b, customer_id: C1, session_start: "2026-08-01 11:50:00", channel: direct}
+          - {session_id: second_a, customer_id: C1, session_start: "2026-08-19 12:00:00", channel: email}
+          - {session_id: after, customer_id: C1, session_start: "2026-08-21 12:00:00", channel: email}
+    expect:
+      rows:
+        - {order_id: O1, session_id: first_a, touch_position: 1, touch_count: 2, non_direct_count: 1}
+        - {order_id: O1, session_id: first_b, touch_position: 2, touch_count: 2, non_direct_count: 1}
+        - {order_id: O2, session_id: second_a, touch_position: 1, touch_count: 1, non_direct_count: 1}
+
+  # Days before conversion of 14/14/7/0 with a 7-day half-life give raw decay weights
+  # 0.25/0.25/0.5/1, so the normalised time-decay weights are exact binary fractions.
+  - name: attribution_models_split_credit_as_documented
+    model: int_attribution_weights
+    given:
+      - input: ref('int_conversion_paths')
+        rows:
+          - {order_id: O1, session_id: t1, channel: paid_social, touch_position: 1, touch_count: 4, days_before_conversion: 14, non_direct_rank_from_end: 3, non_direct_count: 3}
+          - {order_id: O1, session_id: t2, channel: display, touch_position: 2, touch_count: 4, days_before_conversion: 14, non_direct_rank_from_end: 2, non_direct_count: 3}
+          - {order_id: O1, session_id: t3, channel: email, touch_position: 3, touch_count: 4, days_before_conversion: 7, non_direct_rank_from_end: 1, non_direct_count: 3}
+          - {order_id: O1, session_id: t4, channel: direct, touch_position: 4, touch_count: 4, days_before_conversion: 0, non_direct_rank_from_end: null, non_direct_count: 3}
+    expect:
+      rows:
+        - {session_id: t1, model: first_touch, weight: 1.0}
+        - {session_id: t2, model: first_touch, weight: 0.0}
+        - {session_id: t3, model: first_touch, weight: 0.0}
+        - {session_id: t4, model: first_touch, weight: 0.0}
+        - {session_id: t1, model: last_touch, weight: 0.0}
+        - {session_id: t2, model: last_touch, weight: 0.0}
+        - {session_id: t3, model: last_touch, weight: 0.0}
+        - {session_id: t4, model: last_touch, weight: 1.0}
+        - {session_id: t1, model: last_non_direct, weight: 0.0}
+        - {session_id: t2, model: last_non_direct, weight: 0.0}
+        - {session_id: t3, model: last_non_direct, weight: 1.0}
+        - {session_id: t4, model: last_non_direct, weight: 0.0}
+        - {session_id: t1, model: linear, weight: 0.25}
+        - {session_id: t2, model: linear, weight: 0.25}
+        - {session_id: t3, model: linear, weight: 0.25}
+        - {session_id: t4, model: linear, weight: 0.25}
+        - {session_id: t1, model: time_decay, weight: 0.125}
+        - {session_id: t2, model: time_decay, weight: 0.125}
+        - {session_id: t3, model: time_decay, weight: 0.25}
+        - {session_id: t4, model: time_decay, weight: 0.5}
+        - {session_id: t1, model: position_based, weight: 0.4}
+        - {session_id: t2, model: position_based, weight: 0.1}
+        - {session_id: t3, model: position_based, weight: 0.1}
+        - {session_id: t4, model: position_based, weight: 0.4}

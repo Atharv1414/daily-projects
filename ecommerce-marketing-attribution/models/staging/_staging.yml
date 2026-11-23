@@ -1,0 +1,100 @@
+version: 2
+
+models:
+  - name: stg_campaigns
+    description: Campaign catalogue with lower-cased campaign names for joining to UTMs.
+    columns:
+      - name: campaign_id
+        data_tests: [unique, not_null]
+
+  - name: stg_web_hits
+    description: Page views without crawler traffic or tag double-fires; UTM values normalised.
+    columns:
+      - name: hit_id
+        data_tests: [unique, not_null]
+      - name: anonymous_id
+        data_tests: [not_null]
+      - name: utm_medium
+        description: Canonical medium (null on non-landing hits and organic/direct visits).
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["cpc", "paid_social", "display", "affiliate", "email"]
+
+  - name: stg_orders
+    description: One row per real, non-cancelled order; latest webhook version wins.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["completed", "refunded"]
+      - name: net_revenue_gbp
+        description: Merchandise value net of discount in GBP; refunded orders count as zero.
+        data_tests: [not_null, non_negative]
+
+  - name: stg_logins
+    columns:
+      - name: login_id
+        data_tests: [unique, not_null]
+
+  - name: stg_ad_spend
+    description: Daily spend per campaign after resolving platform restatements.
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: ["campaign_id", "spend_date"]
+    columns:
+      - name: spend_gbp
+        data_tests: [not_null, non_negative]
+      - name: campaign_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_campaigns')
+                field: campaign_id
+
+unit_tests:
+  - name: stg_web_hits_normalises_utms_and_drops_bots_and_duplicates
+    model: stg_web_hits
+    given:
+      - input: ref('raw_web_hits')
+        rows:
+          - {hit_id: h1, anonymous_id: a1, hit_at: "2026-07-01 20:00:00", page_path: /, utm_source: "Facebook ", utm_medium: paid-social, utm_campaign: AW26, referrer_domain: null, user_agent: "Mozilla iPhone"}
+          - {hit_id: h1, anonymous_id: a1, hit_at: "2026-07-01 20:00:00", page_path: /, utm_source: "Facebook ", utm_medium: paid-social, utm_campaign: AW26, referrer_domain: null, user_agent: "Mozilla iPhone"}
+          - {hit_id: h2, anonymous_id: a2, hit_at: "2026-07-01 20:00:00", page_path: /, utm_source: fb, utm_medium: CPC, utm_campaign: x, referrer_domain: null, user_agent: "Mozilla Chrome"}
+          - {hit_id: h3, anonymous_id: bot, hit_at: "2026-07-01 20:00:00", page_path: /, utm_source: null, utm_medium: null, utm_campaign: null, referrer_domain: null, user_agent: "Mozilla/5.0 (compatible; Googlebot/2.1)"}
+    expect:
+      rows:
+        - {hit_id: h1, utm_source: facebook, utm_medium: paid_social, utm_campaign: aw26}
+        - {hit_id: h2, utm_source: facebook, utm_medium: cpc, utm_campaign: x}
+
+  - name: stg_orders_keeps_latest_version_and_drops_test_and_cancelled
+    model: stg_orders
+    given:
+      - input: ref('raw_orders')
+        rows:
+          - {order_id: O1, customer_id: C1, ordered_at: "2026-07-01 20:00:00", gross_pence: 5000, discount_pence: 750, delivery_pence: 0, status: completed, customer_email: c1@example.co.uk, _loaded_at: "2026-07-01 20:02:00"}
+          - {order_id: O1, customer_id: C1, ordered_at: "2026-07-01 20:00:00", gross_pence: 5000, discount_pence: 750, delivery_pence: 0, status: refunded, customer_email: c1@example.co.uk, _loaded_at: "2026-07-02 09:00:00"}
+          - {order_id: O2, customer_id: C2, ordered_at: "2026-07-01 21:00:00", gross_pence: 3000, discount_pence: 0, delivery_pence: 395, status: completed, customer_email: c2@example.co.uk, _loaded_at: "2026-07-01 21:02:00"}
+          - {order_id: O3, customer_id: C3, ordered_at: "2026-07-01 21:00:00", gross_pence: 3000, discount_pence: 0, delivery_pence: 395, status: completed, customer_email: qa+O3@hearthandfield.test, _loaded_at: "2026-07-01 21:02:00"}
+          - {order_id: O4, customer_id: C4, ordered_at: "2026-07-01 21:00:00", gross_pence: 3000, discount_pence: 0, delivery_pence: 395, status: cancelled, customer_email: c4@example.co.uk, _loaded_at: "2026-07-01 21:02:00"}
+    expect:
+      rows:
+        - {order_id: O1, status: refunded, net_revenue_gbp: 0}
+        - {order_id: O2, status: completed, net_revenue_gbp: 30.00}
+
+  - name: stg_ad_spend_latest_restatement_wins
+    model: stg_ad_spend
+    given:
+      - input: ref('raw_ad_spend')
+        rows:
+          - {campaign_id: META-PS-01, spend_date: "2026-07-01", clicks: 10, impressions: 900, spend_pence: 800, _loaded_at: "2026-07-02 02:30:00"}
+          - {campaign_id: META-PS-01, spend_date: "2026-07-01", clicks: 10, impressions: 900, spend_pence: 1000, _loaded_at: "2026-07-03 03:00:00"}
+    expect:
+      rows:
+        - {campaign_id: META-PS-01, spend_date: "2026-07-01", spend_gbp: 10.00}

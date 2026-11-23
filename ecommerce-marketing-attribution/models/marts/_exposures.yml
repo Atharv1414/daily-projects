@@ -1,0 +1,29 @@
+version: 2
+
+exposures:
+  - name: marketing_budget_review
+    label: Monthly marketing budget review
+    type: analysis
+    maturity: medium
+    owner:
+      name: Marketing Analytics
+      email: marketing-analytics@example.co.uk
+    description: >
+      Monthly pack comparing attribution models per channel and recommending budget shifts.
+      Built from the channel scorecard, the lift table and the monthly rollup.
+    depends_on:
+      - ref('mart_channel_attribution')
+      - ref('mart_channel_lift')
+      - ref('mart_monthly_rollup')
+
+  - name: paid_media_daily_dashboard
+    label: Paid media daily dashboard
+    type: dashboard
+    maturity: high
+    owner:
+      name: Performance Marketing
+      email: performance@example.co.uk
+    description: Daily spend pacing and 7-day ROAS per campaign for the paid media team.
+    depends_on:
+      - ref('mart_campaign_daily')
+      - ref('mart_conversion_paths')
