@@ -4,6 +4,8 @@ A secure full-stack blog: server-rendered pages, a JSON API, three roles and ful
 
 **Role focus:** Software Engineer · **Stack:** Python, Flask, SQLAlchemy 2, SQLite (FTS5), Alembic, bcrypt, pytest, Docker, GitHub Actions
 
+<img src="docs/images/post.png" alt="A Candid post with Markdown headings, a list and a quotation" width="620">
+
 Design decisions are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Features

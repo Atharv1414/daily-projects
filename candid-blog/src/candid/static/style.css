@@ -14,3 +14,10 @@ button { font: inherit; padding: .4rem .9rem; cursor: pointer; }
 .flash { border-left: 4px solid var(--accent); padding: .4rem .8rem; }
 article { border-bottom: 1px solid var(--line); padding: .6rem 0; overflow-wrap: anywhere; }
 pre { overflow-x: auto; }
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; margin: 1.4rem 0 .5rem; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.35rem; }
+h2 a, nav a { text-decoration: none; }
+h2 a:hover, nav a:hover { text-decoration: underline; }
+nav input { padding: .3rem .6rem !important; border: 1px solid var(--line); border-radius: 6px; }
+blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid var(--accent); font-style: italic; }

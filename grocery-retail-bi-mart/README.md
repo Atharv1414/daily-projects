@@ -37,6 +37,8 @@ which stores are behind target. The business wants **one trusted set of KPI defi
 history that stays right when stores and products change, and dashboards where each manager
 sees only their own stores. And they need proof that the dashboard ties back to the till data.
 
+![Executive dashboard: KPI cards and monthly net sales against target](docs/images/dashboard.png)
+
 ## ✨ Features
 
 - **Star schema in DuckDB:** `fact_sales_line` (till-line grain) and `fact_store_target` (store
