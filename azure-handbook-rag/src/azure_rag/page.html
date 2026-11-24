@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Ask the handbook</title>
+<style>
+:root{color-scheme:light dark}
+body{font:16px/1.5 system-ui;max-width:680px;margin:3rem auto;padding:0 1rem}
+form{display:flex;gap:.5rem}input{flex:1;min-width:0}input,button{font:inherit;padding:.6rem}
+#answer{white-space:pre-wrap;margin:1.5rem 0}details{margin:.4rem 0}
+</style>
+<h1>Ask the handbook</h1>
+<form><input id="q" aria-label="Question" maxlength="1000" required placeholder="How many days of annual leave do I get?"><button>Ask</button></form>
+<div id="answer" aria-live="polite"></div><div id="sources"></div>
+<script>
+const $ = s => document.querySelector(s);
+$("form").onsubmit = async e => {
+  e.preventDefault();
+  $("button").disabled = true; $("#answer").textContent = "Searching…"; $("#sources").replaceChildren();
+  try {
+    const r = await fetch("/ask", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({question: $("#q").value})});
+    if (!r.ok) throw new Error(`Request failed (${r.status})`);
+    const data = await r.json();
+    $("#answer").textContent = data.answer;
+    for (const s of data.sources) {
+      const d = document.createElement("details"), h = document.createElement("summary"), p = document.createElement("p");
+      h.textContent = `[${s.number}] ${s.source}: ${s.title}`; p.textContent = s.excerpt;
+      d.append(h, p); $("#sources").append(d);
+    }
+  } catch (err) { $("#answer").textContent = err.message; }
+  finally { $("button").disabled = false; }
+};
+</script></html>

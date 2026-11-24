@@ -2,7 +2,7 @@
 
 A new, self-contained project every day, each aimed at a role I'm applying for: **Software Engineer, AI / Agentic AI Engineer, Data Engineer, Data Analyst, BI Developer and Business Analyst**.
 
-Agentic AI projects use Claude tool calling and cover current patterns such as MCP servers, agentic RAG, multi-agent orchestration, guardrails and LLM evals. Each one also runs in an offline demo mode, so no API key is needed to try it.
+Most agentic AI projects use Claude tool calling and cover current patterns such as MCP servers, agentic RAG, multi-agent orchestration, guardrails and LLM evals. Each one also runs in an offline demo mode, so no API key is needed to try it.
 
 Every project solves a realistic business problem, ships with tests and its own sample data, and explains the skills it demonstrates in its README.
 
@@ -21,6 +21,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 011 | 2026-11-24 | [🏭 Factory Telemetry Historian](factory-telemetry-historian/) | Data Engineer | C++20, CMake, GoogleTest: WAL crash recovery, Gorilla + scaled-delta compression, compaction, threaded ingestion with back-pressure |
 | 012 | 2026-11-24 | [⚖️ Law Firm Profitability BI](law-firm-profitability-bi/) | BI Developer | Python, DuckDB (bitemporal facts, accumulating + periodic snapshots, closure table), price-volume-mix, FastAPI, Plotly |
 | 013 | 2026-11-24 | [🏠 Damp & Mould Repairs Business Case](damp-mould-repairs-business-case/) | Business Analyst | Python, process mining + conformance checking, discrete-event simulation, NPV/tornado/break-even, RACI, MoSCoW + Gherkin traceability |
+| 014 | 2026-11-24 | [☁️ Azure Handbook RAG](azure-handbook-rag/) | AI Engineer | Python, Azure AI Search (hybrid + semantic rerank), Azure AI Foundry, Entra ID, Bicep, FastAPI, citation checks |
 
 ## Languages and layout
 
