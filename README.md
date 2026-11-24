@@ -29,6 +29,7 @@ Larger standalone projects, separate from the daily series.
 
 | Project | Role focus | Stack |
 |---|---|---|
+| [🚦 Traffic Light Optimisation System](traffic-light-optimisation/) | AI Engineer | YOLOv8, OpenCV, threaded real-time pipeline, rule engine, closed-loop simulation |
 | [📝 Candid Blog](candid-blog/) | Software Engineer | Flask, SQLAlchemy, SQLite FTS5, REST API, bcrypt, role-based access, CSRF; 87 tests, 98% coverage |
 | [🕸 Web Scraping Data Pipeline](web-scraping-pipeline/) | Data Engineer | Python, BeautifulSoup, MySQL 8.4, retries + back-off, validation + quarantine, cron |
 | [🇫🇷 French Lingo](french-lingo/) | Software Engineer | Python, Tkinter, SQLite, SM-2 spaced repetition, plug-in language packs |
