@@ -47,6 +47,8 @@ Projects are written in **Python**, **C# (.NET 10)**, **C++20** and **SQL** (dbt
 | Python | `pip install -e ".[dev]"` · `pytest` · `ruff` | `src/<package>/`, `tests/`, `pyproject.toml` |
 | C# / .NET 10 | `dotnet build` · `dotnet test` (xUnit) · `dotnet format` | `<Name>.slnx`, `src/<Name>.*/`, `tests/<Name>.*.Tests/`, `Directory.Build.props` |
 | C++20 | `cmake --preset dev` · `ctest --preset dev` (GoogleTest) · `clang-format` | `CMakeLists.txt`, `CMakePresets.json`, `include/`, `src/`, `apps/`, `tests/` |
+| React + SCSS | `npm ci` · `npm run lint` · `npm test` (Vitest) · `npm run e2e` (Playwright, axe) | `package.json`, `src/`, `tests/`, `e2e/` |
+| Full stack | the Python and React commands, in `api/` and `web/` | `api/pyproject.toml`, `web/package.json` |
 | SQL: dbt + DuckDB | `dbt build` (models, data tests, unit tests) · `sqlfluff lint` | `dbt_project.yml`, `models/staging`, `models/marts`, `macros/`, `tests/` |
 | SQL: PostgreSQL 17 | `scripts/test.sh` (throwaway database, migrations, SQL assertion tests) · `sqlfluff lint` | `db/migrations/V###__*.sql`, `tests/test_*.sql`, `scripts/` |
 
