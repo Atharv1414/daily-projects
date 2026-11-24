@@ -29,6 +29,8 @@ Every project solves a realistic business problem, ships with tests and its own 
 
 Larger standalone projects, separate from the daily series.
 
+Four projects also have their own repository, which is where further work on them happens: [Azure Handbook RAG](https://github.com/Atharv1414/azure-handbook-rag), [Traffic Light Optimisation](https://github.com/Atharv1414/traffic-light-optimisation), [Warehouse Stock Reservation API](https://github.com/Atharv1414/warehouse-stock-reservation-api) and [Factory Telemetry Historian](https://github.com/Atharv1414/factory-telemetry-historian). The folders here are the original versions.
+
 | Project | Role focus | Stack |
 |---|---|---|
 | [🚦 Traffic Light Optimisation System](traffic-light-optimisation/) | AI Engineer | YOLOv8, OpenCV, threaded real-time pipeline, rule engine, closed-loop simulation |
