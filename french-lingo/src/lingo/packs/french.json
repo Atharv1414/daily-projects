@@ -1,0 +1,472 @@
+{
+ "id": "french",
+ "name": "French",
+ "lessons": [
+  {
+   "id": "greetings",
+   "title": "Greetings",
+   "words": [
+    {
+     "id": "bonjour",
+     "prompt": "hello",
+     "answers": [
+      "bonjour"
+     ],
+     "example": "Bonjour, comment ça va ?"
+    },
+    {
+     "id": "bonsoir",
+     "prompt": "good evening",
+     "answers": [
+      "bonsoir"
+     ]
+    },
+    {
+     "id": "au-revoir",
+     "prompt": "goodbye",
+     "answers": [
+      "au revoir"
+     ]
+    },
+    {
+     "id": "s-il-vous-plait",
+     "prompt": "please",
+     "answers": [
+      "s'il vous plaît",
+      "s'il te plaît"
+     ]
+    },
+    {
+     "id": "merci",
+     "prompt": "thank you",
+     "answers": [
+      "merci"
+     ]
+    },
+    {
+     "id": "excusez-moi",
+     "prompt": "excuse me",
+     "answers": [
+      "excusez-moi",
+      "excuse-moi"
+     ]
+    },
+    {
+     "id": "oui",
+     "prompt": "yes",
+     "answers": [
+      "oui"
+     ]
+    },
+    {
+     "id": "non",
+     "prompt": "no",
+     "answers": [
+      "non"
+     ]
+    },
+    {
+     "id": "a-bientot",
+     "prompt": "see you soon",
+     "answers": [
+      "à bientôt"
+     ]
+    },
+    {
+     "id": "bonne-nuit",
+     "prompt": "good night",
+     "answers": [
+      "bonne nuit"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "family",
+   "title": "Family",
+   "words": [
+    {
+     "id": "la-mere",
+     "prompt": "the mother",
+     "answers": [
+      "la mère"
+     ]
+    },
+    {
+     "id": "le-pere",
+     "prompt": "the father",
+     "answers": [
+      "le père"
+     ]
+    },
+    {
+     "id": "le-frere",
+     "prompt": "the brother",
+     "answers": [
+      "le frère"
+     ]
+    },
+    {
+     "id": "la-soeur",
+     "prompt": "the sister",
+     "answers": [
+      "la sœur"
+     ]
+    },
+    {
+     "id": "le-fils",
+     "prompt": "the son",
+     "answers": [
+      "le fils"
+     ]
+    },
+    {
+     "id": "la-fille",
+     "prompt": "the daughter",
+     "answers": [
+      "la fille"
+     ]
+    },
+    {
+     "id": "la-grand-mere",
+     "prompt": "the grandmother",
+     "answers": [
+      "la grand-mère"
+     ]
+    },
+    {
+     "id": "le-grand-pere",
+     "prompt": "the grandfather",
+     "answers": [
+      "le grand-père"
+     ]
+    },
+    {
+     "id": "l-oncle",
+     "prompt": "the uncle",
+     "answers": [
+      "l'oncle"
+     ]
+    },
+    {
+     "id": "la-tante",
+     "prompt": "the aunt",
+     "answers": [
+      "la tante"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "food-and-drink",
+   "title": "Food and drink",
+   "words": [
+    {
+     "id": "le-pain",
+     "prompt": "the bread",
+     "answers": [
+      "le pain"
+     ],
+     "example": "J'achète le pain."
+    },
+    {
+     "id": "le-fromage",
+     "prompt": "the cheese",
+     "answers": [
+      "le fromage"
+     ]
+    },
+    {
+     "id": "l-eau",
+     "prompt": "the water",
+     "answers": [
+      "l'eau"
+     ]
+    },
+    {
+     "id": "le-cafe",
+     "prompt": "the coffee",
+     "answers": [
+      "le café"
+     ]
+    },
+    {
+     "id": "la-pomme",
+     "prompt": "the apple",
+     "answers": [
+      "la pomme"
+     ]
+    },
+    {
+     "id": "le-poulet",
+     "prompt": "the chicken",
+     "answers": [
+      "le poulet"
+     ]
+    },
+    {
+     "id": "le-poisson",
+     "prompt": "the fish",
+     "answers": [
+      "le poisson"
+     ]
+    },
+    {
+     "id": "les-legumes",
+     "prompt": "the vegetables",
+     "answers": [
+      "les légumes"
+     ]
+    },
+    {
+     "id": "le-lait",
+     "prompt": "the milk",
+     "answers": [
+      "le lait"
+     ]
+    },
+    {
+     "id": "l-oeuf",
+     "prompt": "the egg",
+     "answers": [
+      "l'œuf"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "travel",
+   "title": "Travel",
+   "words": [
+    {
+     "id": "la-gare",
+     "prompt": "the train station",
+     "answers": [
+      "la gare"
+     ],
+     "example": "Où est la gare ?"
+    },
+    {
+     "id": "l-aeroport",
+     "prompt": "the airport",
+     "answers": [
+      "l'aéroport"
+     ]
+    },
+    {
+     "id": "le-billet",
+     "prompt": "the ticket",
+     "answers": [
+      "le billet"
+     ]
+    },
+    {
+     "id": "la-rue",
+     "prompt": "the street",
+     "answers": [
+      "la rue"
+     ]
+    },
+    {
+     "id": "la-voiture",
+     "prompt": "the car",
+     "answers": [
+      "la voiture"
+     ]
+    },
+    {
+     "id": "l-avion",
+     "prompt": "the plane",
+     "answers": [
+      "l'avion"
+     ]
+    },
+    {
+     "id": "l-hotel",
+     "prompt": "the hotel",
+     "answers": [
+      "l'hôtel"
+     ]
+    },
+    {
+     "id": "a-gauche",
+     "prompt": "left",
+     "answers": [
+      "à gauche",
+      "gauche"
+     ]
+    },
+    {
+     "id": "a-droite",
+     "prompt": "right",
+     "answers": [
+      "à droite",
+      "droite"
+     ]
+    },
+    {
+     "id": "tout-droit",
+     "prompt": "straight on",
+     "answers": [
+      "tout droit"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "time",
+   "title": "Time",
+   "words": [
+    {
+     "id": "aujourd-hui",
+     "prompt": "today",
+     "answers": [
+      "aujourd'hui"
+     ]
+    },
+    {
+     "id": "demain",
+     "prompt": "tomorrow",
+     "answers": [
+      "demain"
+     ],
+     "example": "À demain !"
+    },
+    {
+     "id": "hier",
+     "prompt": "yesterday",
+     "answers": [
+      "hier"
+     ]
+    },
+    {
+     "id": "la-semaine",
+     "prompt": "the week",
+     "answers": [
+      "la semaine"
+     ]
+    },
+    {
+     "id": "le-mois",
+     "prompt": "the month",
+     "answers": [
+      "le mois"
+     ]
+    },
+    {
+     "id": "l-annee",
+     "prompt": "the year",
+     "answers": [
+      "l'année",
+      "l'an"
+     ]
+    },
+    {
+     "id": "lundi",
+     "prompt": "Monday",
+     "answers": [
+      "lundi"
+     ]
+    },
+    {
+     "id": "vendredi",
+     "prompt": "Friday",
+     "answers": [
+      "vendredi"
+     ]
+    },
+    {
+     "id": "maintenant",
+     "prompt": "now",
+     "answers": [
+      "maintenant"
+     ]
+    },
+    {
+     "id": "toujours",
+     "prompt": "always",
+     "answers": [
+      "toujours"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "common-verbs",
+   "title": "Common verbs",
+   "words": [
+    {
+     "id": "etre",
+     "prompt": "to be",
+     "answers": [
+      "être"
+     ],
+     "example": "Je veux être prêt."
+    },
+    {
+     "id": "avoir",
+     "prompt": "to have",
+     "answers": [
+      "avoir"
+     ]
+    },
+    {
+     "id": "aller",
+     "prompt": "to go",
+     "answers": [
+      "aller"
+     ]
+    },
+    {
+     "id": "faire",
+     "prompt": "to do, to make",
+     "answers": [
+      "faire"
+     ]
+    },
+    {
+     "id": "vouloir",
+     "prompt": "to want",
+     "answers": [
+      "vouloir"
+     ]
+    },
+    {
+     "id": "pouvoir",
+     "prompt": "to be able to",
+     "answers": [
+      "pouvoir"
+     ]
+    },
+    {
+     "id": "savoir",
+     "prompt": "to know (a fact)",
+     "answers": [
+      "savoir"
+     ]
+    },
+    {
+     "id": "venir",
+     "prompt": "to come",
+     "answers": [
+      "venir"
+     ]
+    },
+    {
+     "id": "voir",
+     "prompt": "to see",
+     "answers": [
+      "voir"
+     ]
+    },
+    {
+     "id": "prendre",
+     "prompt": "to take",
+     "answers": [
+      "prendre"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "id": "spanish",
+ "name": "Spanish",
+ "lessons": [
+  {
+   "id": "greetings",
+   "title": "Greetings",
+   "words": [
+    {
+     "id": "hola",
+     "prompt": "hello",
+     "answers": [
+      "hola"
+     ]
+    },
+    {
+     "id": "adios",
+     "prompt": "goodbye",
+     "answers": [
+      "adiós"
+     ]
+    },
+    {
+     "id": "por-favor",
+     "prompt": "please",
+     "answers": [
+      "por favor"
+     ]
+    },
+    {
+     "id": "gracias",
+     "prompt": "thank you",
+     "answers": [
+      "gracias"
+     ]
+    },
+    {
+     "id": "si",
+     "prompt": "yes",
+     "answers": [
+      "sí"
+     ]
+    },
+    {
+     "id": "no",
+     "prompt": "no",
+     "answers": [
+      "no"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "food-and-drink",
+   "title": "Food and drink",
+   "words": [
+    {
+     "id": "el-pan",
+     "prompt": "the bread",
+     "answers": [
+      "el pan"
+     ]
+    },
+    {
+     "id": "el-agua",
+     "prompt": "the water",
+     "answers": [
+      "el agua"
+     ]
+    },
+    {
+     "id": "el-queso",
+     "prompt": "the cheese",
+     "answers": [
+      "el queso"
+     ]
+    },
+    {
+     "id": "la-manzana",
+     "prompt": "the apple",
+     "answers": [
+      "la manzana"
+     ]
+    },
+    {
+     "id": "el-cafe",
+     "prompt": "the coffee",
+     "answers": [
+      "el café"
+     ]
+    },
+    {
+     "id": "la-leche",
+     "prompt": "the milk",
+     "answers": [
+      "la leche"
+     ]
+    }
+   ]
+  }
+ ]
+}

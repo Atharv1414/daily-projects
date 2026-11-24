@@ -23,6 +23,16 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 013 | 2026-11-24 | [🏠 Damp & Mould Repairs Business Case](damp-mould-repairs-business-case/) | Business Analyst | Python, process mining + conformance checking, discrete-event simulation, NPV/tornado/break-even, RACI, MoSCoW + Gherkin traceability |
 | 014 | 2026-11-24 | [☁️ Azure Handbook RAG](azure-handbook-rag/) | AI Engineer | Python, Azure AI Search (hybrid + semantic rerank), Azure AI Foundry, Entra ID, Bicep, FastAPI, citation checks |
 
+## Portfolio projects
+
+Larger standalone projects, separate from the daily series.
+
+| Project | Role focus | Stack |
+|---|---|---|
+| [📝 Candid Blog](candid-blog/) | Software Engineer | Flask, SQLAlchemy, SQLite FTS5, REST API, bcrypt, role-based access, CSRF; 87 tests, 98% coverage |
+| [🕸 Web Scraping Data Pipeline](web-scraping-pipeline/) | Data Engineer | Python, BeautifulSoup, MySQL 8.4, retries + back-off, validation + quarantine, cron |
+| [🇫🇷 French Lingo](french-lingo/) | Software Engineer | Python, Tkinter, SQLite, SM-2 spaced repetition, plug-in language packs |
+
 ## Languages and layout
 
 Projects are written in **Python**, **C# (.NET 10)**, **C++20** and **SQL** (dbt on DuckDB, and PostgreSQL). Each one lives in its own folder with a README, an architecture write-up (`docs/ARCHITECTURE.md`), tests and an MIT licence.

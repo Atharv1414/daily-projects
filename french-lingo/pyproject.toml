@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "french-lingo"
+version = "1.0.0"
+description = "Desktop vocabulary trainer with spaced repetition"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "hypothesis>=6"]
+
+[project.scripts]
+french-lingo = "lingo.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.setuptools.package-data]
+lingo = ["packs/*.json"]
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
