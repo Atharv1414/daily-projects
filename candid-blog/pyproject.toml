@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "candid-blog"
+version = "1.0.0"
+description = "Secure full-stack blog with roles, a REST API and full-text search"
+requires-python = ">=3.11"
+dependencies = [
+  "bcrypt>=4.2",
+  "flask>=3.1",
+  "flask-limiter>=3.8",
+  "flask-login>=0.6.3",
+  "flask-sqlalchemy>=3.1",
+  "flask-wtf>=1.2",
+  "flask-migrate>=4",
+  "gunicorn>=23",
+  "markdown-it-py>=3",
+  "nh3>=0.2.18",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.setuptools.package-data]
+candid = ["templates/**/*.html", "static/*", "migrations/**/*"]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["src/candid/migrations"]
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--cov=candid --cov-branch --cov-report=term-missing --cov-fail-under=85"
+[tool.coverage.run]
+omit = ["*/migrations/*"]

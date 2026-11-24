@@ -1,0 +1,2 @@
+{% extends "base.html" %}
+{% block content %}<h1>{{ error.name if error else 'Something went wrong' }}</h1><p>{{ error.description if error else 'Please try again.' }}</p>{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{% set old = request.form %}
+<h1>{{ 'Edit post' if post else 'New post' }}</h1>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+{% for e in errors.values() %}<p class="error" role="alert">{{ e }}</p>{% endfor %}
+<label for="title">Title</label><input id="title" name="title" maxlength="150" required value="{{ old.get('title', post.title if post else '') }}">
+<label for="body">Body (Markdown)</label><textarea id="body" name="body" rows="14" required>{{ old.get('body', post.body if post else '') }}</textarea>
+<label for="tags">Tags, separated by commas</label><input id="tags" name="tags" value="{{ old.get('tags', post.tags | map(attribute='name') | join(', ') if post else '') }}">
+<label><input type="checkbox" name="published" {% if old.get('published') or (post and post.published and not old) %}checked{% endif %}> Published</label>
+<button>Save</button></form>
+{% endblock %}

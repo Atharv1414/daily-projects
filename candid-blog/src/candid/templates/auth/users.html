@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}<h1>Users</h1>
+<table>{% for p in people %}<tr><td>{{ p.username }}</td><td>
+<form method="post" action="{{ url_for('auth.update_user', user_id=p.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<select name="role" aria-label="Role of {{ p.username }}">{% for r in roles %}<option {% if p.role == r %}selected{% endif %}>{{ r.value }}</option>{% endfor %}</select>
+<label><input type="checkbox" name="active" {% if p.active %}checked{% endif %}> Active</label> <button>Save</button></form>
+</td></tr>{% endfor %}</table>{% endblock %}

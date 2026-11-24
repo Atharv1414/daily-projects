@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}<h1>Register</h1>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+{% for e in errors.values() %}<p class="error" role="alert">{{ e }}</p>{% endfor %}
+<label for="username">Username</label><input id="username" name="username" autocomplete="username" required value="{{ request.form.get('username', '') }}">
+<label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required value="{{ request.form.get('email', '') }}">
+<label for="password">Password (12 characters or more)</label><input id="password" name="password" type="password" autocomplete="new-password" minlength="12" required>
+<button>Register</button></form>{% endblock %}

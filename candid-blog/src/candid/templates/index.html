@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+{% if search %}<h1>Results for “{{ search }}”</h1>{% elif tag %}<h1>Tagged “{{ tag }}”</h1>{% endif %}
+{% for post in page.items %}
+<article>
+  <h2><a href="{{ url_for('blog.show', slug=post.slug) }}">{{ post.title }}</a>{% if not post.published %} (draft){% endif %}</h2>
+  <p class="meta">{{ post.author.username }} · {{ post.created_at.strftime('%-d %B %Y') }}
+  {% for t in post.tags %} · <a href="{{ url_for('blog.index', tag=t.name) }}">{{ t.name }}</a>{% endfor %}</p>
+</article>
+{% else %}<p>No posts found.</p>{% endfor %}
+<p>{% if page.has_prev %}<a href="{{ url_for('blog.index', page=page.prev_num, q=search, tag=tag) }}">Newer</a>{% endif %}
+{% if page.has_next %}<a href="{{ url_for('blog.index', page=page.next_num, q=search, tag=tag) }}">Older</a>{% endif %}</p>
+{% endblock %}
