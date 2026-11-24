@@ -1,0 +1,26 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "dev",
+      "displayName": "Debug + sanitizers",
+      "generator": "Ninja",
+      "binaryDir": "build/dev",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug", "ENABLE_SANITIZERS": "ON" }
+    },
+    {
+      "name": "release",
+      "displayName": "Optimised release",
+      "generator": "Ninja",
+      "binaryDir": "build/release",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release", "BUILD_TESTING": "OFF", "BUILD_BENCHMARKS": "ON" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "dev", "configurePreset": "dev" },
+    { "name": "release", "configurePreset": "release" }
+  ],
+  "testPresets": [
+    { "name": "dev", "configurePreset": "dev", "output": { "outputOnFailure": true } }
+  ]
+}

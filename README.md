@@ -18,6 +18,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 008 | 2026-11-23 | [📦 Warehouse Stock Reservation API](warehouse-stock-reservation-api/) | Software Engineer | C# / .NET 10, ASP.NET Core minimal APIs, EF Core + SQLite (optimistic concurrency, migrations), JWT + roles, transactional outbox, xUnit |
 | 009 | 2026-11-23 | [📺 Streaming QoE Pipeline](streaming-qoe-pipeline/) | Data Engineer | Python, event-time stream processing (watermarks, tumbling/hopping/session windows), DuckDB exactly-once checkpoints, Pydantic, Hypothesis |
 | 010 | 2026-11-23 | [🧭 E-commerce Marketing Attribution](ecommerce-marketing-attribution/) | Data Analyst | SQL (dbt + DuckDB): sessionisation, ASOF identity stitching, 6 attribution models, lift z-tests, cohorts, ROLLUP; 79 dbt tests |
+| 011 | 2026-11-24 | [🏭 Factory Telemetry Historian](factory-telemetry-historian/) | Data Engineer | C++20, CMake, GoogleTest: WAL crash recovery, Gorilla + scaled-delta compression, compaction, threaded ingestion with back-pressure |
 
 ## Languages and layout
 
