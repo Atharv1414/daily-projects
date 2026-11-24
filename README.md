@@ -1,10 +1,12 @@
 # 🛠 Daily Projects
 
-A new, self-contained project every day, each aimed at a role I'm applying for: **Software Engineer, AI / Agentic AI Engineer, Data Engineer, Data Analyst, BI Developer and Business Analyst**.
+[![tests](https://github.com/Atharv1414/daily-projects/actions/workflows/tests.yml/badge.svg)](https://github.com/Atharv1414/daily-projects/actions/workflows/tests.yml)
+
+A growing collection of self-contained projects across **software engineering, AI and agents, data engineering, data analysis, business intelligence and business analysis**.
 
 Most agentic AI projects use Claude tool calling and cover current patterns such as MCP servers, agentic RAG, multi-agent orchestration, guardrails and LLM evals. Each one also runs in an offline demo mode, so no API key is needed to try it.
 
-Every project solves a realistic business problem, ships with tests and its own sample data, and explains the skills it demonstrates in its README.
+Every project solves a realistic business problem, ships with tests and its own sample data, and documents its design, trade-offs and limitations. Datasets are synthetic unless a project says otherwise. Projects are built with AI-assisted development (Claude Code).
 
 | # | Date | Project | Role focus | Stack |
 |---|---|---|---|---|
