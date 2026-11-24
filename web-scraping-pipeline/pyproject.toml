@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "web-scraping-pipeline"
+version = "1.0.0"
+description = "Fault-tolerant web scraping ETL into MySQL"
+requires-python = ">=3.11"
+dependencies = [
+  "beautifulsoup4>=4.12",
+  "cryptography>=43",
+  "pydantic>=2.8",
+  "pymysql>=1.1.1",
+  "pyyaml>=6",
+  "requests>=2.32",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "hypothesis>=6"]
+
+[project.scripts]
+harvest = "harvest.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

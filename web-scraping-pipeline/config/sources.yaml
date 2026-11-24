@@ -1,0 +1,15 @@
+# Both sites are published specifically for scraping practice.
+http:
+  user_agent: "harvest-portfolio-bot/1.0"
+  timeout_s: 10
+  max_attempts: 5
+  backoff_base_s: 0.5
+  backoff_max_s: 30
+  requests_per_second: 2
+  max_bytes: 5000000
+  respect_robots: true
+sources:
+  books: {url: "https://books.toscrape.com/", max_pages: 200}
+  quotes: {url: "https://quotes.toscrape.com/", max_pages: 50}
+# Refuse to load a run in which more than this share of records failed validation.
+max_reject_rate: 0.2

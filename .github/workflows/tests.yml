@@ -58,6 +58,33 @@ jobs:
         if: hashFiles(format('{0}/Dockerfile', matrix.project)) != ''
         run: docker build -t "${{ matrix.project }}" .
 
+  mysql:
+    name: mysql (web-scraping-pipeline)
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_DATABASE: harvest
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd "mysqladmin ping -h 127.0.0.1" --health-interval 5s
+          --health-timeout 5s --health-retries 20
+    defaults:
+      run:
+        working-directory: web-scraping-pipeline
+    env:
+      HARVEST_MYSQL_URL: mysql://root@127.0.0.1:3306/harvest
+      HARVEST_REQUIRE_MYSQL: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+
   dotnet:
     name: csharp (${{ matrix.project }})
     needs: discover

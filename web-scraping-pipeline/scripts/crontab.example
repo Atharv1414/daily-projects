@@ -1,0 +1,3 @@
+# Daily at 06:15. Install with: crontab -e
+# Put HARVEST_MYSQL_URL in .env (chmod 600). Overlapping runs are refused by a MySQL lock.
+15 6 * * * /path/to/web-scraping-pipeline/scripts/run_scheduled.sh
