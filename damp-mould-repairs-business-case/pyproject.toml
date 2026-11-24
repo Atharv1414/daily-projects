@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "damp-mould-repairs-business-case"
+version = "1.0.0"
+description = "Business case for damp and mould repairs at a housing association: process mining, conformance checking, discrete-event simulation, NPV and a traceable backlog"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Atharv Patil" }]
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "pandas>=2.2", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "hypothesis>=6.100"]
+
+[project.scripts]
+damp-case = "damp_mould_repairs_business_case.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+damp_mould_repairs_business_case = ["content/*.toml"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]

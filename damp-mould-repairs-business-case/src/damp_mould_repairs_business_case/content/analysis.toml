@@ -1,0 +1,329 @@
+# Analyst-authored content. The tool validates it (traceability, RACI rules, MoSCoW balance)
+# and renders it next to the measured results.
+
+[[pain_points]]
+id = "PP1"
+text = "Written summaries wait in one administrator's queue and are typed by hand."
+metric = "met_summary"
+[[pain_points]]
+id = "PP2"
+text = "Make-safe jobs queue behind routine repairs because work is first come, first served."
+metric = "met_make_safe"
+[[pain_points]]
+id = "PP3"
+text = "Survey visits fail because nobody is home, then wait days to be rebooked."
+metric = "no_access_visits"
+[[pain_points]]
+id = "PP4"
+text = "Every case gets a survey visit and a post inspection, whatever its risk."
+metric = "inspections"
+[[pain_points]]
+id = "PP5"
+text = "Nobody can see a statutory clock until it has been missed."
+metric = "met_investigate"
+[[pain_points]]
+id = "PP6"
+text = "Triage and inspection records are missing, so compliance cannot be evidenced."
+metric = "conformance"
+
+[[stakeholders]]
+name = "Tenants and tenant panel"
+interest = "high"
+influence = "medium"
+need = "A safe home, a clear date and no repeated visits"
+engage = "Panel reviews letters and booking texts; two co-design sessions"
+[[stakeholders]]
+name = "Director of Property Services"
+interest = "high"
+influence = "high"
+need = "Compliance at an affordable cost"
+engage = "Sponsor; fortnightly steering group"
+[[stakeholders]]
+name = "Head of Compliance"
+interest = "high"
+influence = "high"
+need = "Evidence that stands up to the Ombudsman and the Regulator"
+engage = "Approves clock definitions and the audit trail"
+[[stakeholders]]
+name = "Surveyors"
+interest = "high"
+influence = "medium"
+need = "Professional judgement respected; fewer wasted journeys"
+engage = "Pilot group; set the rules for desk assessment"
+[[stakeholders]]
+name = "Repairs contractor"
+interest = "medium"
+influence = "high"
+need = "Stable schedules and fair targets"
+engage = "Contract variation workshop before the deadline queue goes live"
+[[stakeholders]]
+name = "Customer contact team"
+interest = "medium"
+influence = "low"
+need = "Simple scripts and one screen"
+engage = "Floor-walkers in go-live week"
+[[stakeholders]]
+name = "Finance"
+interest = "medium"
+influence = "high"
+need = "Cashable benefits separated from released capacity"
+engage = "Signs off assumptions and the benefits tracker"
+[[stakeholders]]
+name = "IT and data protection"
+interest = "low"
+influence = "medium"
+need = "Supported integration; lawful handling of photos of homes"
+engage = "DPIA and integration design reviews"
+
+[raci]
+roles = ["Director", "Product owner", "Compliance", "Surveying", "Contractor", "IT", "Finance"]
+[[raci.activities]]
+name = "Agree clock definitions"
+codes = ["I", "R", "A", "C", "I", "I", "I"]
+[[raci.activities]]
+name = "Design deadline queue rules"
+codes = ["I", "A", "C", "R", "R", "C", ""]
+[[raci.activities]]
+name = "Approve desk assessment criteria"
+codes = ["I", "C", "A", "R", "", "", ""]
+[[raci.activities]]
+name = "Vary repairs contract"
+codes = ["A", "R", "C", "I", "C", "", "C"]
+[[raci.activities]]
+name = "Build and integrate"
+codes = ["I", "A", "C", "C", "I", "R", "I"]
+[[raci.activities]]
+name = "Data protection impact assessment"
+codes = ["I", "C", "A", "I", "", "R", ""]
+[[raci.activities]]
+name = "Track benefits"
+codes = ["I", "R", "C", "I", "I", "", "A"]
+[[raci.activities]]
+name = "Go / no-go decision"
+codes = ["A", "R", "C", "C", "C", "C", "C"]
+
+[[risks]]
+id = "R1"
+text = "Phase 2: desk assessment misses a serious hazard"
+probability = 3
+impact = 5
+mitigation = "Exclude vulnerable tenants and any health flag; 8% assumed to need a visit; monthly sample re-survey"
+owner = "Compliance"
+[[risks]]
+id = "R2"
+text = "Contractor resists deadline-ordered work"
+probability = 3
+impact = 4
+mitigation = "Contract variation agreed before build; four-week parallel run"
+owner = "Director"
+[[risks]]
+id = "R3"
+text = "Simulated gains do not appear because real jobs bring problems the model leaves out"
+probability = 4
+impact = 3
+mitigation = "Four-week pilot with a stage gate; break-even needs only a fraction of the modelled gain"
+owner = "Product owner"
+[[risks]]
+id = "R4"
+text = "Phase 2: tenants without smartphones are left behind"
+probability = 4
+impact = 4
+mitigation = "Phone and in-person routes keep the same clocks; take-up reported by age and disability"
+owner = "Product owner"
+[[risks]]
+id = "R5"
+text = "Phase 2: photos of homes handled unlawfully"
+probability = 2
+impact = 4
+mitigation = "DPIA, retention limit, location data stripped on upload"
+owner = "IT"
+[[risks]]
+id = "R6"
+text = "A severe winter exceeds the modelled peak"
+probability = 3
+impact = 4
+mitigation = "Stress-tested at 15% more demand; surge crews on call-off; weekly forecast against capacity"
+owner = "Director"
+
+[[stories]]
+id = "US01"
+phase = 1
+priority = "Must"
+points = 5
+solves = ["PP5"]
+role = "compliance manager"
+want = "every open case to show its statutory clocks and time remaining"
+so = "I can act before a limit is missed"
+kpi = "met_investigate"
+target = 0.98
+given = "a significant hazard reported 8 working days ago with no completed investigation"
+when = "I open the clock board"
+then = "the case is amber and shows 2 working days remaining"
+[[stories]]
+id = "US02"
+phase = 1
+priority = "Must"
+points = 8
+solves = ["PP2", "PP5"]
+role = "works planner"
+want = "jobs ordered by statutory deadline"
+so = "make-safe work is never stuck behind routine repairs"
+kpi = "met_make_safe"
+target = 0.98
+given = "a routine repair raised on Monday and a make-safe job raised on Tuesday due in 5 days"
+when = "a crew becomes free on Wednesday"
+then = "the make-safe job is offered first"
+[[stories]]
+id = "US03"
+phase = 1
+priority = "Must"
+points = 5
+solves = ["PP1"]
+role = "repairs administrator"
+want = "one summary queue, a standard template and a second trained administrator"
+so = "every tenant hears within 3 working days"
+kpi = "met_summary"
+target = 0.98
+given = "a surveyor has submitted findings and the action plan"
+when = "either administrator opens the queue"
+then = "the oldest summary is offered first and the send is time-stamped"
+[[stories]]
+id = "US04"
+phase = 1
+priority = "Must"
+points = 3
+solves = ["PP5"]
+role = "duty officer"
+want = "emergencies dispatched to a crew as soon as they are triaged"
+so = "the home is made safe within 24 hours"
+kpi = "met_emergency"
+target = 0.99
+given = "a report triaged as an emergency"
+when = "triage is saved"
+then = "a make-safe job is created and the duty crew is alerted"
+[[stories]]
+id = "US05"
+phase = 1
+priority = "Must"
+points = 3
+solves = ["PP6"]
+role = "auditor"
+want = "a case to be impossible to close without triage, summary and completion evidence"
+so = "we can prove what happened"
+kpi = "conformance"
+target = 1.0
+given = "a significant case with no written summary"
+when = "someone tries to close it"
+then = "closure is refused and the missing step is named"
+[[stories]]
+id = "US06"
+phase = 1
+priority = "Must"
+points = 5
+solves = ["PP6"]
+role = "head of compliance"
+want = "an unchangeable log of every milestone and who recorded it"
+so = "evidence stands up to the Ombudsman"
+kpi = "conformance"
+target = 1.0
+given = "a milestone that was corrected"
+when = "I view its history"
+then = "the old value, new value, person, time and reason are all shown"
+[[stories]]
+id = "US07"
+phase = 2
+priority = "Could"
+points = 8
+solves = ["PP4"]
+role = "surveyor"
+want = "to assess low-risk cases from photos and readings"
+so = "visits go to homes that need them"
+kpi = "surveys"
+target = 4600
+given = "a non-emergency case with usable photos and no vulnerability or health flag"
+when = "I complete a desk assessment"
+then = "the case moves to works without a visit and my reasons are recorded"
+[[stories]]
+id = "US08"
+phase = 2
+priority = "Could"
+points = 5
+solves = ["PP3"]
+role = "tenant"
+want = "to choose and confirm a visit time by text or phone"
+so = "I do not miss the surveyor"
+kpi = "no_access_visits"
+target = 600
+given = "a survey is needed"
+when = "I receive the booking message"
+then = "I can pick a slot, and I get a reminder 24 hours before"
+[[stories]]
+id = "US09"
+phase = 2
+priority = "Could"
+points = 5
+solves = ["PP4"]
+role = "quality manager"
+want = "post inspections selected by risk"
+so = "surveyor time is spent on surveys"
+kpi = "inspections"
+target = 2500
+given = "a routine first-visit repair with photos accepted"
+when = "it is completed"
+then = "it is inspected only if sampled"
+[[stories]]
+id = "US10"
+phase = 1
+priority = "Should"
+points = 3
+solves = ["PP3"]
+role = "scheduler"
+want = "a failed visit to release a new slot within 2 working days"
+so = "the clock does not run while nobody acts"
+kpi = "met_investigate"
+target = 0.98
+given = "a visit recorded as no access"
+when = "the surveyor leaves"
+then = "the tenant is offered slots within 2 working days"
+[[stories]]
+id = "US11"
+phase = 2
+priority = "Could"
+points = 5
+solves = ["PP2"]
+role = "stores manager"
+want = "common damp parts forecast and stocked"
+so = "repairs start sooner"
+kpi = "mean_days"
+target = 13
+given = "three extractor fans used per day on average"
+when = "stock falls below five days of cover"
+then = "an order is raised"
+[[stories]]
+id = "US12"
+phase = 2
+priority = "Could"
+points = 3
+solves = ["PP5"]
+role = "tenant"
+want = "to see where my case is"
+so = "I do not have to call"
+kpi = "mean_days"
+target = 13
+given = "an open case"
+when = "I follow my link or call"
+then = "I see the current step and the next date"
+[[stories]]
+id = "US13"
+phase = 2
+priority = "Won't"
+points = 13
+solves = ["PP4"]
+role = "asset manager"
+want = "humidity sensors in every home"
+so = "damp is found before it is reported"
+kpi = "cases"
+target = 0
+given = "a home with humidity above 70% for a week"
+when = "the reading arrives"
+then = "a proactive case is raised"
