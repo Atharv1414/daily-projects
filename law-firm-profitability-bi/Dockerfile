@@ -2,7 +2,8 @@ FROM python:3.12-slim
 WORKDIR /app
 COPY pyproject.toml README.md ./
 COPY src ./src
-RUN pip install --no-cache-dir . && useradd --create-home app && chown app /app
+RUN pip install --no-cache-dir . && useradd --create-home app && mkdir data && chown app data
+ENV LAWBI_DATABASE=/app/data/law_bi.duckdb
 USER app
 RUN law-bi build
 EXPOSE 8000
