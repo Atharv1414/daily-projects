@@ -1,0 +1,44 @@
+// Limewashed belfry by day, black peal board by night. Red is the treble and blue is the line, everywhere.
+@mixin night {
+  --wall: #12171d;
+  --panel: #1a2129;
+  --ink: #e9eef2;
+  --soft: #a9b7c2;
+  --rule: #3a4752;
+  --edge: #7d8d99;
+  --line: #84b4ff;
+  --treble: #ff8a7d;
+  --gilt: #e8c766;
+  --gilt-fill: #c79b33;
+  --metal: #55636d;
+  --board: #0b0f13;
+  --action: #84b4ff;
+  --on-action: #0c1420;
+
+  color-scheme: dark;
+}
+
+:root {
+  --wall: #e6ecee;
+  --panel: #f4f7f8;
+  --ink: #16202a;
+  --soft: #4a5a66;
+  --rule: #b6c3ca;
+  --edge: #6a7a85;
+  --line: #1b45b4;
+  --treble: #b3202a;
+  --gilt: #e8c766;
+  --gilt-fill: #c79b33;
+  --metal: #8a979f;
+  --board: #14181f;
+  --on-board: #eef2f4;
+  --action: #1b45b4;
+  --on-action: #fff;
+  --slab: 'Rokkitt Variable', rockwell, georgia, serif;
+  --text: 'Atkinson Hyperlegible', verdana, sans-serif;
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+
+  color-scheme: light;
+
+  @media (prefers-color-scheme: dark) { @include night; }
+}

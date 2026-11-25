@@ -1,0 +1,13 @@
+.bell {
+  display: block;
+  width: calc(100% * var(--size, 1));
+  overflow: visible;
+
+  &__wheel { fill: none; stroke: var(--edge); stroke-width: 3; }
+  &__stock { fill: var(--ink); }
+  &__metal { fill: var(--metal); }
+  &__raised { fill: var(--gilt-fill); }
+  &__rim { fill: none; stroke: var(--board); stroke-width: 1.5; opacity: 0.6; }
+  &__clapper { fill: var(--ink); }
+  &__crack { fill: none; stroke: var(--board); stroke-width: 3; }
+}

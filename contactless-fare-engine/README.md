@@ -52,7 +52,7 @@ dotnet run -c Release --project src/FareEngine.Simulator -- 2000 4 42
 That plays four weeks of taps through the real database and checks the result. To run the API (OpenAPI at `/openapi/v1.json`), set a reader secret and a staff key hash in the environment:
 
 ```bash
-Auth__Readers__gate-1=choose-a-secret dotnet run --project src/FareEngine.Api
+Auth__Readers__gate1=choose-a-secret dotnet run --project src/FareEngine.Api
 ```
 
 | Endpoint | Who | What |

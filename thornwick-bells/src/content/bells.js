@@ -1,0 +1,11 @@
+/* An invented ring. Weights are in hundredweight, quarters and pounds, as bell founders still give them. */
+export const BELLS = [
+  { number: 1, name: 'Patience', note: 'F', weight: '4-1-18', cast: 1894, founder: 'Warrender & Sons, Lowgate', words: 'I lead, I wait, I lead again', fault: 'Clapper worn to one side; strikes late at backstroke.', work: 'New clapper and bearings', cost: 9800, raised: 9800 },
+  { number: 2, name: 'Agnes', note: 'E', weight: '4-3-02', cast: 1894, founder: 'Warrender & Sons, Lowgate', words: 'For Agnes Pell, who rang for England to sleep', fault: 'Headstock split along the grain.', work: 'Cast-iron headstock', cost: 14200, raised: 14200 },
+  { number: 3, name: 'Little John', note: 'D', weight: '5-2-11', cast: 1731, founder: 'Josiah Crake, Thornwick', words: 'Iohn Harcastle and Wm Booth wardens', fault: 'Sound, but hung in a frame eaten by beetle.', work: 'Frame rebuild, bay three', cost: 18600, raised: 13950 },
+  { number: 4, name: 'The Weaver', note: 'C', weight: '6-1-07', cast: 1731, founder: 'Josiah Crake, Thornwick', words: 'My thread is sound', fault: 'Quarter-turned once already; the lip is chipped.', work: 'Quarter turn and retune', cost: 16400, raised: 7380 },
+  { number: 5, name: 'Mercy', note: 'B flat', weight: '7-3-20', cast: 1664, founder: 'founder unknown', words: 'Mercie to them that went', fault: 'Cracked from the lip to the shoulder in the cold of 2018. Silent since.', work: 'Weld, or recast if welding fails', cost: 34500, raised: 12075 },
+  { number: 6, name: 'Harvest', note: 'A', weight: '8-2-14', cast: 1894, founder: 'Warrender & Sons, Lowgate', words: 'Sown in hope', fault: 'Bearings dry; heavy to raise.', work: 'Ball bearings and gudgeons', cost: 11200, raised: 8960 },
+  { number: 7, name: 'Old Constant', note: 'G', weight: '10-0-25', cast: 1602, founder: 'Henry Tolland, travelling founder', words: 'I was here', fault: 'The oldest. Listed for preservation, so nothing may be drilled.', work: 'Clamped headstock, no drilling', cost: 28700, raised: 10045 },
+  { number: 8, name: 'Great Thornwick', note: 'F', weight: '13-3-06', cast: 1894, founder: 'Warrender & Sons, Lowgate', words: 'Come all', fault: 'Wheel out of true; rope jumps.', work: 'New oak wheel and stay', cost: 15600, raised: 5460 },
+]

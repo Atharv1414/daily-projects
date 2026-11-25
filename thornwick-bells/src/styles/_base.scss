@@ -1,0 +1,74 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-padding-top: 1rem; }
+
+body {
+  margin: 0;
+  background: var(--wall);
+  color: var(--ink);
+  font: 1.0625rem/1.6 var(--text);
+}
+
+h1, h2 {
+  margin: 0;
+  font-family: var(--slab);
+  font-weight: 600;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); letter-spacing: -0.015em; }
+h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); }
+p { margin: 0; max-width: 62ch; }
+a { color: var(--action); text-underline-offset: 0.2em; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+legend { padding: 0; font-weight: 700; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+figure { margin: 0; }
+main:focus { outline: none; }
+:focus-visible { outline: 3px solid var(--action); outline-offset: 3px; }
+
+kbd {
+  padding: 0 0.4em;
+  border: 1px solid var(--edge);
+  border-bottom-width: 3px;
+  font: 700 0.9em var(--text);
+}
+
+.lead { font-size: 1.2rem; line-height: 1.5; max-width: 54ch; }
+.is-treble { color: var(--treble); fill: var(--treble); font-weight: 700; }
+.is-bell { color: var(--line); fill: var(--line); font-weight: 700; }
+
+.skip {
+  position: absolute;
+  left: -999px;
+
+  &:focus { left: 1rem; top: 0.5rem; z-index: 5; padding: 0.5rem 1rem; background: var(--panel); }
+}
+
+.go {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border: 0;
+  background: var(--action);
+  color: var(--on-action);
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+.plain {
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--edge);
+  background: none;
+
+  &:hover:not(:disabled) { border-color: var(--action); color: var(--action); }
+  &:disabled { opacity: 0.45; cursor: default; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
