@@ -1,0 +1,27 @@
+{
+  "mortgages": 42706,
+  "person_months": 384009,
+  "left": 0.45407703938156957,
+  "left_low": 0.4492635501068534,
+  "left_high": 0.45887696191030175,
+  "left_naive": 0.7352355802931339,
+  "stayed": 0.3853516981806428,
+  "left_before_fix_ends": 0.15774883192711892,
+  "broker_gap": [
+    0.1724636464778242,
+    0.1630381099209001,
+    0.18267541188753766
+  ],
+  "brier": {
+    "Same rate for everyone": 0.22148584642729768,
+    "Finished cases only (logistic)": 0.1988241805640414,
+    "Lookup table (shock x channel)": 0.20351395964007538,
+    "Competing-risks model": 0.19395075095258604
+  },
+  "auc": 0.6871152727760753,
+  "reached_at_20": {
+    "Chance x balance": 0.44856735299959294,
+    "Chance only": 0.3515418183034909,
+    "Balance only": 0.39999890717954506
+  }
+}

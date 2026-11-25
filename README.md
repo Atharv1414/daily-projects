@@ -26,6 +26,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 014 | 2026-11-24 | [☁️ Azure Handbook RAG](azure-handbook-rag/) | AI Engineer | Python, Azure AI Search (hybrid + semantic rerank), Azure AI Foundry, Entra ID, Bicep, FastAPI, citation checks |
 | 015 | 2026-11-25 | [🚇 Contactless Fare Engine](contactless-fare-engine/) | Software Engineer | C# / .NET 10, ASP.NET Core minimal APIs, EF Core + SQLite, HMAC signing, durable job queue, append-only ledger, xUnit |
 | 016 | 2026-11-25 | [🔔 Thornwick Bells](thornwick-bells/) | Front-End Engineer | React 19, JavaScript, SCSS, SVG, Web Audio, Vitest, Playwright + axe |
+| 017 | 2026-11-25 | [🏦 Fixed-Rate Mortgage Exits](fixed-rate-mortgage-exits/) | Data Analyst | Python, pandas, competing risks (Aalen-Johansen, delayed entry), discrete-time hazards, temporal backtest with censoring weights, matplotlib |
 
 ## Portfolio projects
 
