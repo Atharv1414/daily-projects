@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FareEngine.Domain/FareEngine.Domain.csproj" />
+    <Project Path="src/FareEngine.Application/FareEngine.Application.csproj" />
+    <Project Path="src/FareEngine.Api/FareEngine.Api.csproj" />
+    <Project Path="src/FareEngine.Simulator/FareEngine.Simulator.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FareEngine.Tests/FareEngine.Tests.csproj" />
+  </Folder>
+</Solution>

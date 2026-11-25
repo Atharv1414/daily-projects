@@ -24,6 +24,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 012 | 2026-11-24 | [⚖️ Law Firm Profitability BI](law-firm-profitability-bi/) | BI Developer | Python, DuckDB (bitemporal facts, accumulating + periodic snapshots, closure table), price-volume-mix, FastAPI, Plotly |
 | 013 | 2026-11-24 | [🏠 Damp & Mould Repairs Business Case](damp-mould-repairs-business-case/) | Business Analyst | Python, process mining + conformance checking, discrete-event simulation, NPV/tornado/break-even, RACI, MoSCoW + Gherkin traceability |
 | 014 | 2026-11-24 | [☁️ Azure Handbook RAG](azure-handbook-rag/) | AI Engineer | Python, Azure AI Search (hybrid + semantic rerank), Azure AI Foundry, Entra ID, Bicep, FastAPI, citation checks |
+| 015 | 2026-11-25 | [🚇 Contactless Fare Engine](contactless-fare-engine/) | Software Engineer | C# / .NET 10, ASP.NET Core minimal APIs, EF Core + SQLite, HMAC signing, durable job queue, append-only ledger, xUnit |
 
 ## Portfolio projects
 
