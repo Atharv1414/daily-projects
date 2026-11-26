@@ -163,7 +163,7 @@ TEST(Index, SaveRemovesSegmentFilesNoLongerInManifest) {
     index.save(dir.path());
     std::size_t segment_files = 0;
     for (const auto& e : std::filesystem::directory_iterator(dir.path())) {
-        segment_files += e.path().extension() == ".jseg" ? 1 : 0;
+        segment_files += (e.path().extension() == ".jseg") ? 1U : 0U;
     }
     EXPECT_EQ(segment_files, 1U);
 }

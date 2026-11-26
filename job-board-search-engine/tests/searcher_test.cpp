@@ -2,6 +2,7 @@
 
 #include <gtest/gtest.h>
 
+#include <algorithm>
 #include <set>
 
 #include "jobsearch/corpus.hpp"
@@ -209,7 +210,7 @@ TEST(Searcher, BruteForceAgreesOnCorpusConjunctions) {
                 return std::ranges::any_of(
                     text, [&](const Token& tok) { return tok.term == normalize_term(t); });
             });
-            expected += all ? 1 : 0;
+            expected += (all) ? 1U : 0U;
         }
         SearchRequest req;
         req.query = query;

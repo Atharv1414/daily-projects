@@ -47,7 +47,7 @@ TEST(Stem, IsIdempotentOnCorpusVocabulary) {
         for (const auto& w : split_words(job.body)) {
             const auto once = stem(w);
             ++words;
-            stable += stem(once) == once ? 1 : 0;
+            stable += (stem(once) == once) ? 1U : 0U;
         }
     }
     EXPECT_GT(static_cast<double>(stable) / static_cast<double>(words), 0.95);

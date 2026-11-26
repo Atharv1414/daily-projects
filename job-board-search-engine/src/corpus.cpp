@@ -1,5 +1,6 @@
 #include "jobsearch/corpus.hpp"
 
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <span>

@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include <map>
 #include <set>
 
@@ -567,9 +568,9 @@ std::string make_snippet(const std::string& text, const std::vector<std::string>
     std::size_t best_hits = 0;
     std::size_t hits = 0;
     for (std::size_t i = 0; i < words.size(); ++i) {
-        hits += words[i].hit ? 1 : 0;
+        hits += (words[i].hit) ? 1U : 0U;
         if (i >= window) {
-            hits -= words[i - window].hit ? 1 : 0;
+            hits -= (words[i - window].hit) ? 1U : 0U;
         }
         if (i + 1 >= window && hits > best_hits) {
             best_hits = hits;
