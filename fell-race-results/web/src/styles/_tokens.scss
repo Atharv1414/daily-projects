@@ -1,0 +1,50 @@
+// Colour and type are taken from the fells: lichen-pale ground, slate ink, heather and
+// bracken for the two runners, and the faint lines of a contour map.
+
+$font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+$font-body: 'IBM Plex Sans', system-ui, sans-serif;
+
+$bp-sm: 40rem;
+$bp-md: 64rem;
+
+:root {
+  --ground: #eef1ea;
+  --paper: #f9fbf6;
+  --ink: #17242f;
+  --muted: #4b5a64;
+  --line: #c3cdbf;
+  --contour: #d3dccd;
+  --heather: #8a2d5a;
+  --heather-soft: #f2dde7;
+  --bracken: #8f520c;
+  --bracken-soft: #f6e6cf;
+  --moss: #2d6537;
+  --danger: #a1261b;
+  --hill-top: #9fb59a;
+  --hill-foot: #e3eadf;
+  --focus: #1f5fa8;
+  --shadow: 0 1px 0 rgb(23 36 47 / 8%), 0 8px 24px -16px rgb(23 36 47 / 35%);
+
+  color-scheme: light;
+
+  @media (prefers-color-scheme: dark) {
+    --ground: #10161b;
+    --paper: #172028;
+    --ink: #e5ebe4;
+    --muted: #a3b1b6;
+    --line: #34434d;
+    --contour: #1e2a32;
+    --heather: #f08cbd;
+    --heather-soft: #3b1f2e;
+    --bracken: #f0b469;
+    --bracken-soft: #3a2b18;
+    --moss: #8fd19a;
+    --danger: #ff9b8f;
+    --hill-top: #4d6a55;
+    --hill-foot: #1a252c;
+    --focus: #8ec5ff;
+    --shadow: 0 1px 0 rgb(0 0 0 / 40%);
+
+    color-scheme: dark;
+  }
+}

@@ -1,0 +1,12 @@
+# Runs the API against a real MongoDB 8. The web app runs with `npm run dev` (it proxies /api).
+services:
+  mongo:
+    image: mongo:8
+    ports: ["27017:27017"]
+  api:
+    build: ./api
+    environment:
+      MONGO_URL: mongodb://mongo:27017
+      FELL_ORGANISER_TOKENS: ${FELL_ORGANISER_TOKENS:?set an organiser token}
+    ports: ["8000:8000"]
+    depends_on: [mongo]
