@@ -29,6 +29,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 017 | 2026-11-25 | [🏦 Fixed-Rate Mortgage Exits](fixed-rate-mortgage-exits/) | Data Analyst | Python, pandas, competing risks (Aalen-Johansen, delayed entry), discrete-time hazards, temporal backtest with censoring weights, matplotlib |
 | 018 | 2026-11-26 | [🔎 Job Board Search Engine](job-board-search-engine/) | Software Engineer | C++20, CMake, GoogleTest: positional inverted index, block-compressed postings with skip tables, BM25F, query parser, segments + merges, lock-free snapshot reads |
 | 019 | 2026-11-26 | [🏃 Hollinbeck Harriers: Fell Race Results](fell-race-results/) | Front-End Engineer | React 19, JavaScript, SCSS, SVG ghost race, Vitest, Playwright + axe · FastAPI + MongoDB 8 (aggregation pipelines, validators, idempotent uploads), shared JSON contract |
+| 020 | 2026-11-26 | [🎓 Multi-Academy Trust Attendance BI](trust-attendance-bi/) | BI Developer | Python, DuckDB SQL (SCD2 + census-date bridge, QUALIFY), semantic layer with aggregate navigator, row-level security, DfE-style small-number suppression, Plotly |
 
 ## Portfolio projects
 
