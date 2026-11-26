@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Generated outputs (rebuild with `delivery-bi build` and `delivery-bi dashboard`)
+warehouse/
+dashboard/
+*.db
+*.duckdb
+*.duckdb.wal
