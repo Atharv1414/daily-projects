@@ -32,6 +32,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 020 | 2026-11-26 | [🎓 Multi-Academy Trust Attendance BI](trust-attendance-bi/) | BI Developer | Python, DuckDB SQL (SCD2 + census-date bridge, QUALIFY), semantic layer with aggregate navigator, row-level security, DfE-style small-number suppression, Plotly |
 | 021 | 2026-11-26 | [🚚 Last-Mile Delivery BI](last-mile-delivery-bi/) | BI Developer | Python, DuckDB star schema (two fact grains, drill-across), SQL window functions + GROUPING SETS, semantic layer with RAG targets, Plotly drill-down dashboard |
 | 022 | 2026-11-27 | [🎚 Streaming Feature-Flag Service](streaming-feature-flags/) | Software Engineer | C# / .NET 10, ASP.NET Core minimal APIs, EF Core + SQLite (optimistic concurrency, migrations), hand-written rule parser, Murmur3 bucketing, Channels, SRM chi-square, xUnit |
+| 023 | 2026-11-27 | [⛵ Kestrel & Lock: Narrowboat Holidays](narrowboat-hire/) | Front-End Engineer | React 19, JavaScript, SCSS, hand-drawn SVG map and lock elevations, route planner (cycle search, Dijkstra, DP itinerary), Vitest, Playwright + axe |
 
 ## Portfolio projects
 

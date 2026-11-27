@@ -1,0 +1,116 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 1.0625rem / 1.6 var(--text);
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 6vw, 4.4rem);
+  font-weight: 750;
+  font-stretch: 85%;
+  max-width: 15ch;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 650;
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--water);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+
+  &:hover {
+    text-decoration-thickness: 0.16em;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+h1:focus,
+h2:focus {
+  outline: none;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  background: var(--buoy);
+  color: var(--on-buoy);
+  padding: 0.6rem 1rem;
+  z-index: 10;
+
+  &:focus {
+    top: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+fieldset {
+  min-inline-size: 0;
+}
+
+// Single-column grids by default; min-width 0 lets wide content (dates, tables) shrink instead of pushing the page sideways.
+.hero,
+.split,
+.planner__body,
+.book__body,
+.fleet__row,
+.boat-page__grid,
+.featured__item {
+  grid-template-columns: minmax(0, 1fr);
+}

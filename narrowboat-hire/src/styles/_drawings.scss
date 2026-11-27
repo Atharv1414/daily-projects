@@ -1,0 +1,346 @@
+// The map, the side elevation, the strip maps, the boats and the lock.
+.map {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+
+  &__svg {
+    display: block;
+    min-width: 40rem;
+    width: 100%;
+    height: auto;
+  }
+
+  &__bank {
+    stroke: var(--bank);
+    stroke-width: 14;
+    stroke-linecap: round;
+  }
+
+  &__water {
+    stroke: var(--soft);
+    stroke-width: 6;
+    stroke-linecap: round;
+  }
+
+  &__reach--narrow &__bank {
+    stroke-width: 9;
+  }
+
+  &__reach--narrow &__water {
+    stroke-width: 3;
+  }
+
+  &__reach--on &__bank {
+    stroke: var(--water-fill);
+  }
+
+  &__reach--on &__water {
+    stroke: var(--water);
+  }
+
+  &__reach--tunnel &__water {
+    stroke-dasharray: 10 8;
+    stroke-linecap: butt;
+  }
+
+  &__reach--blocked {
+    opacity: 0.55;
+  }
+
+  &__hatch {
+    stroke: var(--hatch);
+    stroke-width: 4;
+  }
+
+  &__lock {
+    stroke: var(--lock);
+    stroke-width: 3;
+  }
+
+  &__place {
+    circle,
+    rect {
+      fill: var(--surface);
+      stroke: var(--ink);
+      stroke-width: 3;
+    }
+
+    &--on circle {
+      fill: var(--water);
+    }
+
+    &--base rect {
+      fill: var(--buoy);
+    }
+  }
+
+  &__label {
+    font: 600 22px var(--text);
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--surface);
+    stroke-width: 6px;
+    stroke-linejoin: round;
+  }
+
+  &__feature {
+    font: italic 500 18px var(--text);
+    fill: var(--soft);
+    paint-order: stroke;
+    stroke: var(--surface);
+    stroke-width: 5px;
+  }
+
+  &__key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.7rem 1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.9rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+  }
+}
+
+.key {
+  display: inline-block;
+  width: 1.6rem;
+  height: 0.9rem;
+
+  &--lock {
+    background: linear-gradient(90deg, transparent 45%, var(--lock) 45% 60%, transparent 60%), var(--water-fill);
+  }
+
+  &--narrow {
+    height: 0.35rem;
+    background: var(--soft);
+  }
+
+  &--tunnel {
+    height: 0;
+    border-top: 4px dashed var(--soft);
+  }
+
+  &--base {
+    width: 0.9rem;
+    background: var(--buoy);
+    outline: 2px solid var(--ink);
+  }
+
+  &--blocked {
+    background: repeating-linear-gradient(45deg, var(--hatch) 0 3px, transparent 3px 7px);
+  }
+}
+
+.profile {
+  margin: 0 0 1.5rem;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+  }
+
+  &__grid line {
+    stroke: var(--rule);
+  }
+
+  &__grid text,
+  &__axis {
+    font: 13px var(--text);
+    fill: var(--soft);
+  }
+
+  &__water {
+    fill: var(--water-fill);
+  }
+
+  &__line {
+    fill: none;
+    stroke: var(--water);
+    stroke-width: 2.5;
+  }
+
+  &__gate {
+    stroke: var(--lock);
+    stroke-width: 2;
+  }
+
+  figcaption {
+    font-size: 0.95rem;
+    color: var(--soft);
+    margin-top: 0.4rem;
+  }
+}
+
+.strip {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0.4rem 0;
+
+  &__water {
+    stroke: var(--water);
+    stroke-width: 5;
+  }
+
+  &__lock {
+    stroke: var(--lock);
+    stroke-width: 2;
+  }
+
+  &__stop {
+    fill: var(--surface);
+    stroke: var(--ink);
+    stroke-width: 2;
+
+    &--night {
+      fill: var(--ink);
+    }
+
+    &--base {
+      fill: var(--buoy);
+    }
+  }
+}
+
+.boat {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  &__waterline {
+    stroke: var(--water);
+    stroke-width: 3;
+  }
+
+  &__hull,
+  &__cabin {
+    stroke: var(--ink);
+    stroke-width: 1.5;
+  }
+
+  &__porthole {
+    fill: var(--water-fill);
+    stroke-width: 3;
+  }
+
+  &__metal {
+    fill: var(--ink);
+  }
+
+  &__tiller {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  &__name {
+    font: 700 15px var(--display);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+.lock {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: clamp(1rem, 3vw, 2rem);
+  margin-bottom: 2.5rem;
+  max-width: 52rem;
+
+  &__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  &__water {
+    fill: var(--water-fill);
+    transition: y 900ms ease, height 900ms ease;
+  }
+
+  &__wall {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 3;
+  }
+
+  &__wall-fill {
+    fill: var(--soft);
+  }
+
+  &__bank {
+    stroke: var(--bank);
+    stroke-width: 6;
+  }
+
+  &__gate rect {
+    fill: var(--ink);
+    transition: x 600ms ease;
+  }
+
+  &__beam {
+    stroke: var(--ink);
+    stroke-width: 6;
+    stroke-linecap: round;
+  }
+
+  &__paddle {
+    fill: var(--surface);
+    stroke: var(--ink);
+    stroke-width: 3;
+
+    &--open {
+      fill: var(--lock);
+    }
+  }
+
+  &__boat {
+    transition: transform 900ms ease;
+
+    path {
+      fill: #5c1f24;
+      stroke: var(--ink);
+      stroke-width: 1.5;
+    }
+
+    rect {
+      fill: #5c1f24;
+      stroke: var(--ink);
+      stroke-width: 1.5;
+    }
+  }
+
+  &__count {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin: 0;
+  }
+
+  &__step {
+    min-height: 10rem;
+  }
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+}

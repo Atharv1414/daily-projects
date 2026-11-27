@@ -1,0 +1,621 @@
+.page-head {
+  margin-bottom: 2rem;
+
+  &--lost {
+    min-height: 50vh;
+  }
+}
+
+// Home: a left-weighted hero with the boat breaking out to the right edge.
+.hero {
+  display: grid;
+  gap: 2rem;
+  align-items: end;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--rule);
+
+  @media (width >= 60rem) {
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  &__art {
+    border-bottom: 10px solid var(--water-fill);
+    padding-bottom: 0.5rem;
+  }
+
+  &__caption {
+    font-size: 0.95rem;
+    color: var(--soft);
+  }
+}
+
+.band {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.featured {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0;
+
+  &__item {
+    display: grid;
+    gap: 0.3rem 2rem;
+    padding: 1.2rem 0;
+    border-top: 2px solid var(--ink);
+
+    @media (width >= 56rem) {
+      grid-template-columns: 22rem 1fr;
+
+      p:last-child {
+        grid-column: 2;
+      }
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    h3 a {
+      color: var(--ink);
+    }
+  }
+
+  &__numbers {
+    color: var(--soft);
+    font-size: 0.95rem;
+    margin: 0.2rem 0 0;
+  }
+}
+
+.split {
+  display: grid;
+  gap: 2rem;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--rule);
+
+  @media (width >= 56rem) {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+.lockmiles {
+  background: var(--ink);
+  color: var(--ground);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+
+  &__inputs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 0.8rem;
+    font: 650 1.4rem / 1 var(--display);
+  }
+
+  label {
+    display: grid;
+    gap: 0.3rem;
+    font: 600 0.9rem var(--text);
+  }
+
+  input {
+    width: 5.5rem;
+    font: 700 1.6rem / 1 var(--display);
+    padding: 0.35rem 0.5rem;
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  &__out {
+    background: var(--buoy);
+    color: var(--on-buoy);
+    padding: 0.5rem 0.7rem;
+    border-radius: var(--radius);
+  }
+}
+
+.fleet-strip {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+
+  &__link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0 1.5rem;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.4rem 0;
+
+    @media (width >= 48rem) {
+      grid-template-columns: minmax(0, 2.2fr) 1fr;
+      align-items: center;
+
+      .boat {
+        grid-row: span 2;
+      }
+    }
+
+    &:hover .fleet-strip__name {
+      text-decoration: underline;
+    }
+  }
+
+  &__name {
+    font: 700 1.4rem / 1.1 var(--display);
+  }
+
+  &__meta {
+    color: var(--soft);
+  }
+}
+
+// Planner
+.planner__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2rem;
+  align-items: flex-start;
+  padding: 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  margin-bottom: 1rem;
+
+  .field select {
+    width: 17rem;
+  }
+}
+
+.pace {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  &__option {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    border: 2px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 0.5rem 0.7rem;
+
+    &:has(input:checked) {
+      border-color: var(--water);
+    }
+
+    input {
+      accent-color: var(--water);
+    }
+  }
+}
+
+.planner__summary {
+  max-width: 52rem;
+}
+
+.planner__body {
+  display: grid;
+  gap: 2rem;
+
+  @media (width >= 70rem) {
+    grid-template-columns: 22rem minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.options__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.option {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.8rem 0.9rem;
+  border-left: 5px solid var(--rule);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+
+  &--on {
+    border-left-color: var(--water);
+    box-shadow: inset 0 0 0 2px var(--water);
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+
+  &__numbers {
+    font-size: 0.88rem;
+    color: var(--soft);
+  }
+}
+
+.chosen__facts {
+  max-width: 50rem;
+}
+
+.days {
+  width: 100%;
+  min-width: 36rem;
+  background: var(--surface);
+  font-size: 0.95rem;
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  thead th {
+    border-bottom: 2px solid var(--ink);
+  }
+
+  &__row--long {
+    background: var(--sunk);
+  }
+
+  &__flag {
+    color: var(--lock);
+    font-weight: 650;
+  }
+}
+
+// Fleet
+.fleet {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &__row {
+    display: grid;
+    gap: 1rem 2rem;
+    padding: 1.5rem 0;
+    border-top: 2px solid var(--ink);
+
+    @media (width >= 60rem) {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items: center;
+    }
+  }
+
+  &__text h2 a {
+    color: var(--ink);
+  }
+
+  &__routes {
+    color: var(--soft);
+    font-size: 0.95rem;
+  }
+}
+
+.specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
+  margin: 0 0 0.8rem;
+
+  div {
+    display: grid;
+  }
+
+  dt {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--soft);
+  }
+
+  dd {
+    margin: 0;
+    font: 700 1.2rem / 1.2 var(--display);
+  }
+}
+
+.boat-page__grid {
+  display: grid;
+  gap: 2rem;
+  margin: 2rem 0;
+
+  @media (width >= 60rem) {
+    grid-template-columns: 1fr 1.4fr;
+  }
+}
+
+.prices {
+  width: 100%;
+  min-width: 30rem;
+  background: var(--surface);
+
+  caption {
+    text-align: left;
+    color: var(--soft);
+    font-size: 0.9rem;
+    padding-bottom: 0.4rem;
+  }
+
+  th,
+  td {
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+  }
+
+  thead th {
+    font-size: 0.85rem;
+  }
+}
+
+.boat-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+// Booking
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+
+  &__item {
+    color: var(--soft);
+
+    &--on {
+      color: var(--ink);
+      font-weight: 700;
+    }
+  }
+
+  &__n {
+    display: inline-grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: 2px solid currentcolor;
+    font-size: 0.85rem;
+  }
+
+  &__item--on &__n {
+    background: var(--water);
+    border-color: var(--water);
+    color: var(--on-action);
+  }
+}
+
+.book__body {
+  display: grid;
+  gap: 2rem;
+
+  @media (width >= 64rem) {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    align-items: start;
+  }
+}
+
+.boats {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.4rem;
+  display: grid;
+  gap: 0.4rem;
+
+  &__option {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.7rem;
+    padding: 0.6rem 0.8rem;
+    border: 2px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--surface);
+    max-width: 32rem;
+
+    input {
+      grid-row: span 2;
+      accent-color: var(--water);
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-top: 0.2rem;
+    }
+
+    &--on {
+      border-color: var(--water);
+    }
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+
+  &__meta {
+    font-size: 0.9rem;
+    color: var(--soft);
+  }
+}
+
+.quick-dates ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 1.2rem;
+}
+
+.extras {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  max-width: 34rem;
+}
+
+.extra {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid var(--rule);
+  background: var(--surface);
+  border-radius: var(--radius);
+
+  input[type='checkbox'] {
+    width: 1.3rem;
+    height: 1.3rem;
+    accent-color: var(--water);
+    flex: none;
+  }
+
+  input[type='number'] {
+    width: 4.5rem;
+    font: inherit;
+    padding: 0.4rem;
+    margin-left: auto;
+    border: 2px solid var(--soft);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  &--off {
+    color: var(--soft);
+  }
+
+  em {
+    display: block;
+    font-size: 0.9rem;
+  }
+}
+
+.book__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.summary {
+  background: var(--surface);
+  border-top: 6px solid var(--water);
+  padding: 1.2rem;
+
+  @media (width >= 64rem) {
+    position: sticky;
+    top: 1rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  &__lines {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    font: 700 1.3rem / 1.2 var(--display);
+  }
+
+  &__due,
+  &__route {
+    font-size: 0.92rem;
+    color: var(--soft);
+  }
+}
+
+.review__list {
+  display: grid;
+  gap: 0;
+  margin: 0 0 1rem;
+  max-width: 34rem;
+
+  div {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  dt {
+    font-weight: 650;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.confirmed {
+  max-width: 44rem;
+  min-height: 50vh;
+
+  &__ref strong {
+    font: 700 1.6rem / 1 var(--display);
+    background: var(--buoy);
+    color: var(--on-buoy);
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+// First time
+.faq {
+  max-width: 48rem;
+
+  details {
+    border-top: 1px solid var(--rule);
+    padding: 0.8rem 0;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin-top: 0.6rem;
+  }
+}
+
+.cta-line {
+  margin-top: 2rem;
+  font-size: 1.15rem;
+}
