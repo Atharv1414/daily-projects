@@ -1,0 +1,28 @@
+root = true
+
+[*]
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.cs]
+indent_size = 4
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_prefer_braces = true:warning
+dotnet_sort_system_directives_first = true
+# unnecessary usings
+dotnet_diagnostic.IDE0005.severity = warning
+# allow Method_Scenario_Result test names
+dotnet_diagnostic.CA1707.severity = none
+
+[*.{csproj,props,targets,json,yml}]
+indent_size = 2
+
+# migrations are written by dotnet ef
+[**/Migrations/*.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none
+dotnet_diagnostic.IDE0005.severity = none
+dotnet_diagnostic.IDE0161.severity = none
+dotnet_diagnostic.CA1861.severity = none
+csharp_style_namespace_declarations = block_scoped:none
