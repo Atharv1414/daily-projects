@@ -1,6 +1,9 @@
 #include "lob/auction.hpp"
 
 #include <algorithm>
+#include <cstddef>
+#include <optional>
+#include <span>
 #include <vector>
 
 namespace lob {

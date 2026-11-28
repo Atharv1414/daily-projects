@@ -3,7 +3,12 @@
 #include <gtest/gtest.h>
 
 #include <atomic>
+#include <cstddef>
+#include <cstdint>
+#include <stdexcept>
+#include <string>
 #include <thread>
+#include <variant>
 #include <vector>
 
 #include "lob/order_flow.hpp"

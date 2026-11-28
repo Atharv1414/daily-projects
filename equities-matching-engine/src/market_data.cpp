@@ -1,8 +1,15 @@
 #include "lob/market_data.hpp"
 
 #include <algorithm>
+#include <cstdint>
 #include <cstdio>
+#include <optional>
+#include <span>
 #include <sstream>
+#include <string>
+#include <utility>
+#include <variant>
+#include <vector>
 
 namespace lob {
 

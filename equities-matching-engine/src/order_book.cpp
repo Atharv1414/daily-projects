@@ -1,8 +1,13 @@
 #include "lob/order_book.hpp"
 
 #include <algorithm>
+#include <cstddef>
+#include <cstdint>
+#include <optional>
 #include <sstream>
+#include <string>
 #include <utility>
+#include <vector>
 
 namespace lob {
 

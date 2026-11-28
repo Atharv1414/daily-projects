@@ -1,7 +1,16 @@
 #include "lob/exchange.hpp"
 
+#include <cstddef>
+#include <cstdint>
+#include <filesystem>
+#include <memory>
+#include <span>
 #include <stdexcept>
+#include <string>
+#include <thread>
 #include <utility>
+#include <variant>
+#include <vector>
 
 namespace lob {
 

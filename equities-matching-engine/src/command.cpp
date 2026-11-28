@@ -1,9 +1,15 @@
 #include "lob/command.hpp"
 
 #include <charconv>
+#include <cstddef>
+#include <cstdint>
+#include <functional>
 #include <map>
 #include <set>
 #include <string>
+#include <string_view>
+#include <utility>
+#include <variant>
 #include <vector>
 
 namespace lob {

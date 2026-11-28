@@ -1,9 +1,13 @@
 // tmatch: command-line front end for the Thamesgate MTF matching engine.
+#include <algorithm>
 #include <chrono>
+#include <cstddef>
+#include <cstdint>
 #include <cstdio>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <string>
 #include <string_view>
 #include <vector>

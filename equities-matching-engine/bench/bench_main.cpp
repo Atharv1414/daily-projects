@@ -4,10 +4,14 @@
 #include <algorithm>
 #include <atomic>
 #include <chrono>
+#include <cstddef>
 #include <cstdio>
 #include <deque>
+#include <functional>
 #include <map>
 #include <string>
+#include <utility>
+#include <variant>
 #include <vector>
 
 #include "lob/exchange.hpp"

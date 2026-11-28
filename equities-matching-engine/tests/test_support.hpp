@@ -2,7 +2,9 @@
 
 #include <gtest/gtest.h>
 
+#include <cstdint>
 #include <string>
+#include <variant>
 #include <vector>
 
 #include "lob/order_book.hpp"

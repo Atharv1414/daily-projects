@@ -1,6 +1,7 @@
 #include "lob/price_ladder.hpp"
 
 #include <algorithm>
+#include <cstddef>
 #include <iterator>
 
 namespace lob {

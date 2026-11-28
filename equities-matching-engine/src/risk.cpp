@@ -1,5 +1,6 @@
 #include "lob/risk.hpp"
 
+#include <cstdint>
 #include <string>
 
 namespace lob {

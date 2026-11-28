@@ -2,9 +2,16 @@
 
 #include <array>
 #include <charconv>
+#include <cstddef>
+#include <cstdint>
 #include <cstdio>
+#include <filesystem>
+#include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <string>
+#include <string_view>
+#include <utility>
 
 namespace lob {
 

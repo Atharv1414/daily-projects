@@ -2,6 +2,8 @@
 
 #include <gtest/gtest.h>
 
+#include <stdexcept>
+
 #include "lob/command.hpp"
 
 namespace lob {

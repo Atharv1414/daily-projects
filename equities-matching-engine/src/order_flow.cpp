@@ -2,7 +2,12 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
+#include <cstdint>
+#include <span>
 #include <utility>
+#include <variant>
+#include <vector>
 
 namespace lob {
 

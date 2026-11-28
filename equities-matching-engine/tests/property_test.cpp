@@ -1,7 +1,11 @@
 // Randomised invariant tests: thousands of generated sessions with checks after every command.
 #include <gtest/gtest.h>
 
+#include <cstdint>
+#include <string>
 #include <unordered_map>
+#include <variant>
+#include <vector>
 
 #include "lob/order_book.hpp"
 #include "lob/order_flow.hpp"
