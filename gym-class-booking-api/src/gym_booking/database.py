@@ -23,10 +23,18 @@ def make_engine(url: str) -> Engine:
     if url.startswith("sqlite"):
 
         @event.listens_for(engine, "connect")
-        def _enable_foreign_keys(dbapi_connection, _record) -> None:  # pragma: no cover - driver hook
+        def _on_connect(dbapi_connection, _record) -> None:  # pragma: no cover - driver hook
+            # Let SQLAlchemy, not pysqlite, decide when transactions begin (see _begin_immediate).
+            dbapi_connection.isolation_level = None
             cursor = dbapi_connection.cursor()
             cursor.execute("PRAGMA foreign_keys=ON")
             cursor.close()
+
+        @event.listens_for(engine, "begin")
+        def _begin_immediate(conn) -> None:  # pragma: no cover - driver hook
+            # Take SQLite's write lock at the start of every transaction, so a capacity check and
+            # the insert that follows it cannot interleave with another request's.
+            conn.exec_driver_sql("BEGIN IMMEDIATE")
 
     return engine
 

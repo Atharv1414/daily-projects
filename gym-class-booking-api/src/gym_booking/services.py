@@ -100,7 +100,7 @@ def class_out(db: Session, gym_class: GymClass) -> schemas.ClassOut:
 def get_class(db: Session, class_id: int, *, for_update: bool = False) -> GymClass:
     stmt = select(GymClass).where(GymClass.id == class_id)
     if for_update:
-        # Row lock on PostgreSQL/MySQL; SQLite already serialises writers so this is a no-op there.
+        # Row lock on PostgreSQL/MySQL. SQLite ignores it; database.py uses BEGIN IMMEDIATE there instead.
         stmt = stmt.with_for_update()
     gym_class = db.scalar(stmt)
     if gym_class is None:

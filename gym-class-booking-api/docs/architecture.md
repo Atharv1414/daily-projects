@@ -57,8 +57,9 @@ stateDiagram-v2
   partial unique index (`status IN ('CONFIRMED','WAITLISTED')`) catches a concurrent request that
   slips past the check; the `IntegrityError` becomes a clean `409 already_booked`.
 - **Row locking.** Capacity checks load the class with `SELECT … FOR UPDATE`. On PostgreSQL this
-  serialises concurrent bookings for the same class; on SQLite it is a no-op because SQLite already
-  allows a single writer.
+  serialises concurrent bookings for the same class. SQLite ignores `FOR UPDATE`, so on SQLite every
+  transaction starts with `BEGIN IMMEDIATE` instead, which takes the database write lock before the
+  capacity count is read.
 - **Password storage.** PBKDF2-HMAC-SHA256 with a per-user 16-byte salt and 600,000 iterations
   (OWASP 2023 guidance), compared in constant time. Standard library only, no native build step.
 - **Login errors are generic.** Wrong email and wrong password give the same message so the API
