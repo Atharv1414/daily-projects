@@ -36,6 +36,7 @@ Every project solves a realistic business problem, ships with tests and its own 
 | 024 | 2026-11-27 | [🔌 Energy Message Triage: LoRA on a Tiny Transformer](energy-triage-lora/) | Machine Learning Engineer | Python, PyTorch: GPT-style model and BPE trained from scratch, LoRA vs full vs head-only fine-tuning, constrained decoding, int8, held-out-phrasing eval vs TF-IDF baseline |
 | 025 | 2026-11-28 | [🏋️ Gym Class Booking API](gym-class-booking-api/) | Software Engineer | Python, FastAPI, SQLAlchemy 2.0 + SQLite (partial unique index, row locks), Pydantic v2, JWT + PBKDF2, FIFO waitlist state machine, idempotency keys, pytest (99% coverage) |
 | 026 | 2026-11-28 | [📈 Equities Matching Engine](equities-matching-engine/) | Software Engineer | C++20, CMake, GoogleTest: price-time order book, icebergs, STP, auction uncross, volatility collar, CRC-checked write-ahead journal with replay, lock-free SPSC pipeline, 10.8M commands/s |
+| 027 | 2026-11-28 | [🏛 Planning Casework MCP Server and Agent](planning-casework-mcp/) | Agentic AI Engineer | Python, MCP SDK (FastMCP server + stdio client), Claude tool use (Anthropic SDK), explicit agent loop, human approval, injection defence, grounded-answer check, tracing, 52-case eval suite |
 
 ## Portfolio projects
 
