@@ -1,0 +1,9 @@
+# 16:30 closing auction for TGX, fed through `tmatch run`
+NEW sym=TGX id=1 owner=1 side=B px=1234.00 qty=2000
+NEW sym=TGX id=2 owner=2 side=S px=1235.00 qty=1500
+AUCTION sym=TGX
+NEW sym=TGX id=3 owner=3 side=B type=MKT qty=1200
+NEW sym=TGX id=4 owner=4 side=S px=1233.50 qty=2500
+NEW sym=TGX id=5 owner=5 side=B type=ICE px=1235.00 qty=3000 peak=300
+NEW sym=TGX id=6 owner=6 side=B px=1236.00 qty=100 tif=IOC
+UNCROSS sym=TGX
